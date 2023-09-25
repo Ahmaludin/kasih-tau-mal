@@ -2,11 +2,26 @@
 // Adobe Garamond Pro
 
 import Head from 'next/head';
-import { Poppins } from 'next/font/google';
 import styles from '../styles/home.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import localFont from 'next/font/local';
+
+const oswald = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Oswald-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Oswald-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-oswald',
+});
 
 const adobeGaramondPro = localFont({
   src: [
@@ -69,8 +84,6 @@ export default function Home() {
       </Head>
 
       <main style={adobeGaramondPro.style}>
-        <nav style={{ backgroundColor: '#fff', height: '160px' }}></nav>
-
         <header className={styles.header}>
           <Image
             width={2400}
