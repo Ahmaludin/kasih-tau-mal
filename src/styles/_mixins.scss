@@ -1,0 +1,79 @@
+@mixin desktop1 {
+  @media (max-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin desktop2 {
+  @media (max-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @include desktop1 {
+    max-width: 1280px;
+  }
+
+  @include desktop2 {
+    max-width: 1080px;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 960px) {
+    @content;
+  }
+}
+
+@mixin mobileLandscape {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin smallDevice {
+  @media (max-width: 240px) {
+    @content;
+  }
+}
+
+@mixin width {
+  max-width: 1440px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+@mixin ltrb0 {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@mixin sectionTitle($color: #fff) {
+  margin-bottom: 32px;
+  font-size: 1.5rem;
+  font-weight: normal;
+  border-bottom: 1px solid $color;
+  color: $color;
+}
+
+@mixin readMoreBtn {
+  font-weight: 600;
+  border-bottom: 1px solid #252525;
+
+  @include mobile {
+    font-size: 14px;
+  }
+}
+
+@mixin fontPrimary {
+  font-family: var(--font-adobegaramond);
+}

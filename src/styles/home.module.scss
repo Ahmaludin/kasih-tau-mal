@@ -1,0 +1,499 @@
+@import './mixins';
+@import './colors.module.scss';
+
+.header {
+  position: relative;
+  margin-bottom: 32px;
+
+  .image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 10/3.3;
+    object-fit: cover;
+
+    @include tablet {
+      aspect-ratio: 10/4.3;
+    }
+    @include mobile {
+      aspect-ratio: 10/5.3;
+    }
+  }
+
+  .container {
+    position: absolute;
+    @include ltrb0;
+    display: flex;
+    align-items: center;
+
+    .wrap {
+      width: 1440px;
+      margin: auto;
+      padding: 0 20px;
+
+      .textContainer {
+        max-width: 50%;
+
+        @include tablet {
+          max-width: 100%;
+        }
+        @include mobile {
+          max-width: 100%;
+        }
+
+        .welcomeText {
+          color: #fff;
+        }
+
+        .text {
+          color: #fff;
+          font-size: 3rem;
+          line-height: 3rem;
+
+          @include mobile {
+            font-size: 1.5rem;
+            line-height: 1.5rem;
+          }
+
+          @include smallDevice {
+            font-size: 16px;
+            line-height: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.categories {
+  @include width;
+  margin-bottom: 32px;
+
+  @include desktop;
+
+  .sectionTitle {
+    @include sectionTitle($textDark);
+  }
+
+  .container {
+    gap: 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    @include desktop1 {
+      gap: 25px;
+    }
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @include smallDevice {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .category {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 15px;
+
+      @include mobileLandscape {
+        gap: 10px;
+      }
+
+      .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .title {
+        @include mobileLandscape {
+          font-size: 14px;
+        }
+      }
+
+      .info {
+        font-size: 24px;
+
+        @include mobileLandscape {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .category1 {
+      .image {
+        aspect-ratio: 16/9;
+      }
+      .title {
+        border-bottom: 3px solid $textRed;
+      }
+    }
+    .category2 {
+      .image {
+        aspect-ratio: 1;
+      }
+      .title {
+        border-bottom: 3px solid blue;
+      }
+    }
+    .category3 {
+      .image {
+        aspect-ratio: 3/4;
+      }
+      .title {
+        border-bottom: 3px solid yellowgreen;
+      }
+    }
+    .category4 {
+      .image {
+        aspect-ratio: 4/3;
+      }
+      .title {
+        border-bottom: 3px solid green;
+      }
+    }
+  }
+}
+
+.subscribe {
+  background-color: #111;
+  padding: 32px 0 48px;
+  margin-bottom: 32px;
+
+  .sectionTitle {
+    @include sectionTitle(#fff);
+  }
+
+  .container {
+    @include width;
+
+    .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      @include mobileLandscape {
+        flex-direction: column-reverse;
+      }
+
+      .content {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        @include mobileLandscape {
+          width: 100%;
+        }
+
+        .text {
+          color: #fff;
+          font-size: 1.8rem;
+          text-transform: uppercase;
+
+          @include mobileLandscape {
+            font-size: 1.5rem;
+          }
+
+          @include mobile {
+            font-size: 20px;
+          }
+        }
+
+        .form {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          align-items: start;
+
+          .inputName {
+            width: 240px;
+
+            @include mobileLandscape {
+              width: 100%;
+            }
+          }
+
+          .inputEmail {
+            width: 360px;
+
+            @include mobileLandscape {
+              width: 100%;
+            }
+          }
+
+          .input {
+            width: 100%;
+            border: 1px solid #fff;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+          }
+
+          .input::placeholder {
+            color: rgba($color: #fff, $alpha: 0.7);
+          }
+
+          .button {
+            color: #fff;
+            background-color: $textRed;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+
+            @include mobile {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .containerImg {
+        .image {
+          width: 360px;
+          height: 360px;
+
+          @include mobileLandscape {
+            width: 240px;
+            height: 240px;
+          }
+
+          @include mobile {
+            width: 140px;
+            height: 140px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mainContent {
+  @include width;
+
+  .sectionTitle {
+    @include sectionTitle($textDark);
+  }
+
+  .articles {
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-areas: 'col1 col2 col2 aside';
+
+    @include tablet {
+      grid-template-areas:
+        'col1 col2 col2'
+        'aside aside aside';
+    }
+
+    @include mobileLandscape {
+      grid-template-areas:
+        'col2'
+        'col1'
+        'aside';
+    }
+
+    .col1 {
+      grid-area: col1;
+
+      .article3,
+      .article4 {
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #eee;
+      }
+    }
+
+    .col2 {
+      grid-area: col2;
+      margin: 0 15px;
+      padding: 0 15px;
+      border-left: 2px solid #eee;
+      border-right: 2px solid #eee;
+
+      @include tablet {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+
+      @include mobileLandscape {
+        border-left: none;
+        padding-left: 0;
+        margin-left: 0;
+      }
+
+      .article1 {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 15px;
+
+        .articleInfo {
+          .articleTitle {
+            font-size: 2rem;
+
+            @include mobileLandscape {
+              font-size: 1.5rem;
+            }
+
+            @include mobile {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+
+      .article2 {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 15px;
+
+        @include mobileLandscape {
+          display: inherit;
+          margin: -15px 0 15px;
+          padding-bottom: 15px;
+          border-bottom: 2px solid #eee;
+        }
+
+        .articleImg {
+          width: 50%;
+          margin-top: 30px;
+
+          @include mobileLandscape {
+            width: 100%;
+          }
+        }
+
+        .articleInfo {
+          width: 50%;
+
+          @include mobileLandscape {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .aside {
+      grid-area: aside;
+
+      @include tablet {
+        margin-top: 32px;
+      }
+
+      .asideTitle {
+        color: $textDark;
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        li {
+          border-top: 2px solid #eee;
+          padding-top: 10px;
+
+          .title {
+            margin-bottom: 5px;
+            font-weight: 700;
+            color: $textDark;
+          }
+
+          .title:hover {
+            color: $textBlue;
+          }
+
+          .writer {
+            color: $textDark;
+
+            @include mobile {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+
+    .articleImg {
+      .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+        transition: 300ms;
+        -webkit-transition: 300ms;
+        -moz-transition: 300ms;
+        -ms-transition: 300ms;
+        -o-transition: 300ms;
+      }
+
+      .image:hover {
+        box-shadow: 0 0 6px rgba($color: #000000, $alpha: 0.5);
+      }
+    }
+
+    .articleInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 5px;
+
+      .articleCategory {
+        font-size: 15px;
+        color: $textDark;
+      }
+
+      .articleTitle {
+        font-size: 1.5rem;
+        font-weight: 700;
+        @include fontPrimary;
+        color: $textDark;
+
+        @include mobile {
+          font-size: 20px;
+        }
+      }
+
+      .articleCategory:hover,
+      .articleTitle:hover {
+        color: $textBlue;
+      }
+
+      .articleWriter {
+        color: $textDark;
+
+        @include mobile {
+          font-size: 15px;
+        }
+      }
+
+      .articleDate {
+        font-size: 16px;
+        color: #555;
+
+        @include mobile {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

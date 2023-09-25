@@ -1,11 +1,64 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+// monosten e
+// Adobe Garamond Pro
 
-const inter = Inter({ subsets: ['latin'] })
+import Head from 'next/head';
+import { Poppins } from 'next/font/google';
+import styles from '../styles/home.module.scss';
+import Image from 'next/image';
+import Link from 'next/link';
+import localFont from 'next/font/local';
+
+const adobeGaramondPro = localFont({
+  src: [
+    {
+      path: '../../public/fonts/AGaramondPro-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/AGaramondPro-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-adobegaramond',
+});
 
 export default function Home() {
+  function Article() {
+    return (
+      <>
+        <div className={styles.articleImg}>
+          <Link href={`/`}>
+            <Image
+              width={2000}
+              height={2000}
+              src="/images/article1.jpg"
+              alt="category image"
+              className={styles.image}
+            />
+          </Link>
+        </div>
+
+        <div className={styles.articleInfo}>
+          <Link href={`/`} className={styles.articleCategory}>
+            Categori
+          </Link>
+
+          <h3>
+            <Link href={`/`} className={styles.articleTitle}>
+              Jadwal Indonesia Vs Uzbekistan pada Babak 16 Besar Asian Games
+              2022
+            </Link>
+          </h3>
+
+          <p className={styles.articleWriter}>Ahmaludin</p>
+          <p className={styles.articleDate}>September 24, 2023</p>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Head>
@@ -14,101 +67,334 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
 
-        <div className={styles.center}>
+      <main style={adobeGaramondPro.style}>
+        <nav style={{ backgroundColor: '#fff', height: '160px' }}></nav>
+
+        <header className={styles.header}>
           <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
+            width={2400}
+            height={620}
+            src="/images/8.jpg"
+            alt="header background image"
+            className={styles.image}
           />
-        </div>
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
+          <div className={styles.container}>
+            <div className={styles.wrap}>
+              <div className={styles.textContainer}>
+                <p className={styles.welcomeText}>KASIHTAUMAL</p>
+                <h2 className={styles.text}>
+                  LAYANAN INFORMASI DARI BANG AHMAL
+                </h2>
+              </div>
+            </div>
+          </div>
+        </header>
 
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
+        <section className={styles.categories}>
+          <h3 className={styles.sectionTitle}>CATEGORIES</h3>
 
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
+          <div className={styles.container}>
+            <div className={`${styles.category} ${styles.category1}`}>
+              <div>
+                <Link href={`/`}>
+                  <Image
+                    width={400}
+                    height={400}
+                    src="/images/category-gaming.jpg"
+                    alt="category image"
+                    className={styles.image}
+                  />
+                </Link>
+              </div>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
+              <Link href={`/`} className={styles.title}>
+                GAMING
+              </Link>
+              <p className={styles.info}>
+                Yang suka nge-game gass langsung aja kesini.
+              </p>
+            </div>
+
+            <div className={`${styles.category} ${styles.category2}`}>
+              <div>
+                <Link href={`/`}>
+                  <Image
+                    width={400}
+                    height={400}
+                    src="/images/category-entertainment.jpg"
+                    alt="category image"
+                    className={styles.image}
+                  />
+                </Link>
+              </div>
+
+              <Link href={`/`} className={styles.title}>
+                ENTERTAINMENT
+              </Link>
+              <p className={styles.info}>
+                Hiburan dari seluruh dunia melupakan badmood mu.
+              </p>
+            </div>
+
+            <div className={`${styles.category} ${styles.category3}`}>
+              <div>
+                <Link href={`/`}>
+                  <Image
+                    width={400}
+                    height={400}
+                    src="/images/category-sport.jpg"
+                    alt="category image"
+                    className={styles.image}
+                  />
+                </Link>
+              </div>
+
+              <Link href={`/`} className={styles.title}>
+                SPORT
+              </Link>
+              <p className={styles.info}>
+                Sepak bola, basket, voli, bulu tangkis, dan lain-lain.
+              </p>
+            </div>
+
+            <div className={`${styles.category} ${styles.category4}`}>
+              <div>
+                <Link href={`/`}>
+                  <Image
+                    width={400}
+                    height={400}
+                    src="/images/category-lifestyle.jpg"
+                    alt="category image"
+                    className={styles.image}
+                  />
+                </Link>
+              </div>
+
+              <Link href={`/`} className={styles.title}>
+                LIFESTYLE
+              </Link>
+              <p className={styles.info}>
+                Lengkapi harimu dengan membaca artikel gaya hidup.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.subscribe}>
+          <div className={styles.container}>
+            <h3 className={styles.sectionTitle}>SUBSCRIBE</h3>
+
+            <div className={styles.wrap}>
+              <div className={styles.content}>
+                <p className={styles.text}>
+                  Dapatkan notifikasi di setiap update biar ngga ketinggalan!
+                </p>
+
+                <form className={styles.form}>
+                  <div className={styles.inputName}>
+                    <input
+                      type="text"
+                      className={styles.input}
+                      placeholder="kimi no namae wa"
+                    />
+                  </div>
+
+                  <div className={styles.inputEmail}>
+                    <input
+                      type="text"
+                      className={styles.input}
+                      placeholder="email@example.com"
+                    />
+                  </div>
+
+                  <button type="submit" className={styles.button}>
+                    SUBSCRIBE
+                  </button>
+                </form>
+              </div>
+
+              <div className={styles.containerImg}>
+                <Image
+                  width={1024}
+                  height={1024}
+                  src="/images/subscribe-section-image1.png"
+                  alt="image"
+                  className={styles.image}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.mainContent}>
+          <h3 className={styles.sectionTitle}>ARTICLES</h3>
+
+          <div className={styles.articles}>
+            <div className={styles.col1}>
+              <div className={styles.article3}>
+                <div className={styles.articleImg}>
+                  <Link href={`/`}>
+                    <Image
+                      width={2000}
+                      height={2000}
+                      src="/images/article3.jpg"
+                      alt="category image"
+                      className={styles.image}
+                    />
+                  </Link>
+                </div>
+
+                <div className={styles.articleInfo}>
+                  <Link href={`/`} className={styles.articleCategory}>
+                    MAKANAN
+                  </Link>
+
+                  <h3>
+                    <Link href={`/`} className={styles.articleTitle}>
+                      Resep Ayam Bumbu Kemangi, Aromanya Menggugah Selera
+                    </Link>
+                  </h3>
+
+                  <p className={styles.articleWriter}>
+                    Penulis : Elok Dwi Setyaningrum
+                  </p>
+                  <p className={styles.articleDate}>September 14, 2023</p>
+                </div>
+              </div>
+              <div className={styles.article4}>
+                <div className={styles.articleImg}>
+                  <Link href={`/`}>
+                    <Image
+                      width={2000}
+                      height={2000}
+                      src="/images/article4.jpg"
+                      alt="category image"
+                      className={styles.image}
+                    />
+                  </Link>
+                </div>
+
+                <div className={styles.articleInfo}>
+                  <Link href={`/`} className={styles.articleCategory}>
+                    OTOMOTIF
+                  </Link>
+
+                  <h3>
+                    <Link href={`/`} className={styles.articleTitle}>
+                      Alasan Mengapa Toyota Avanza Bekas Tinggi Terus Peminatnya
+                    </Link>
+                  </h3>
+
+                  <p className={styles.articleWriter}>Penulis : Dea</p>
+                  <p className={styles.articleDate}>September 20, 2023</p>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.col2}>
+              <div className={styles.article1}>
+                <div className={styles.articleImg}>
+                  <Link href={`/`}>
+                    <Image
+                      width={2000}
+                      height={2000}
+                      src="/images/article1.jpg"
+                      alt="category image"
+                      className={styles.image}
+                    />
+                  </Link>
+                </div>
+
+                <div className={styles.articleInfo}>
+                  <Link href={`/`} className={styles.articleCategory}>
+                    SPORT
+                  </Link>
+
+                  <h3>
+                    <Link href={`/`} className={styles.articleTitle}>
+                      Jadwal Indonesia Vs Uzbekistan pada Babak 16 Besar Asian
+                      Games 2022
+                    </Link>
+                  </h3>
+
+                  <p className={styles.articleWriter}>Penulis : Ahmaludin</p>
+                  <p className={styles.articleDate}>September 24, 2023</p>
+                </div>
+              </div>
+              <div className={styles.article2}>
+                <div className={styles.articleImg}>
+                  <Link href={`/`}>
+                    <Image
+                      width={2000}
+                      height={2000}
+                      src="/images/article2.jpg"
+                      alt="category image"
+                      className={styles.image}
+                    />
+                  </Link>
+                </div>
+
+                <div className={styles.articleInfo}>
+                  <Link href={`/`} className={styles.articleCategory}>
+                    ALAM
+                  </Link>
+
+                  <h3>
+                    <Link href={`/`} className={styles.articleTitle}>
+                      Dampak Kebakaran Bromo, Kerugian Capai Rp 89,76 Miliar
+                    </Link>
+                  </h3>
+
+                  <p className={styles.articleWriter}>
+                    Penulis : Neneng Rospita
+                  </p>
+                  <p className={styles.articleDate}>September 23, 2023</p>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.aside}>
+              <p className={styles.asideTitle}>ARTKEL TERBARU</p>
+
+              <ul>
+                <li>
+                  <Link href={`/`} className={styles.title}>
+                    Rekomendasi Parfum Clean dan Earthy untuk Zodiak Virgo
+                  </Link>
+                  <p className={styles.writer}>Ahmaludin</p>
+                </li>
+                <li>
+                  <Link href={`/`} className={styles.title}>
+                    Marc Marquez: Kalau Saja Tidak Kepleset, Harusnya Bisa
+                    Podium
+                  </Link>
+                  <p className={styles.writer}>Neneng Rospita</p>
+                </li>
+                <li>
+                  <Link href={`/`} className={styles.title}>
+                    Tas Kulit dari Garut Bikin Bule-bule di Italia Jatuh Cinta
+                  </Link>
+                  <p className={styles.writer}>Dea</p>
+                </li>
+                <li>
+                  <Link href={`/`} className={styles.title}>
+                    Kocak! 7 Patung yang Nggak Mirip Sama Aslinya
+                  </Link>
+                  <p className={styles.writer}>Ahmaludin</p>
+                </li>
+                <li>
+                  <Link href={`/`} className={styles.title}>
+                    7 Mobil Terbaru 2023, Harganya Ada yang di Bawah Rp 200 Juta
+                  </Link>
+                  <p className={styles.writer}>Elok Dwi Setyaningrum</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
       </main>
     </>
-  )
+  );
 }
