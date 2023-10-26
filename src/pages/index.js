@@ -2,8 +2,8 @@ import Head from 'next/head';
 import styles from '../styles/home.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import Articles from '@/components/Articles';
 import { useRef } from 'react';
+import HomeArticles from '@/components/HomeArticles';
 
 export default function Home() {
   const subscribeRef = useRef(null);
@@ -205,7 +205,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Articles />
+        <HomeArticles />
       </main>
     </>
   );
