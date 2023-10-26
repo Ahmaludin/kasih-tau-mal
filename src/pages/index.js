@@ -1,77 +1,17 @@
-// monosten e
-// Adobe Garamond Pro
-
 import Head from 'next/head';
 import styles from '../styles/home.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import localFont from 'next/font/local';
-
-const oswald = localFont({
-  src: [
-    {
-      path: '../../public/fonts/Oswald-Regular.ttf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Oswald-Bold.ttf',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-oswald',
-});
-
-const adobeGaramondPro = localFont({
-  src: [
-    {
-      path: '../../public/fonts/AGaramondPro-Regular.otf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/AGaramondPro-Bold.otf',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-adobegaramond',
-});
+import Articles from '@/components/Articles';
+import { useRef } from 'react';
 
 export default function Home() {
-  function Article() {
-    return (
-      <>
-        <div className={styles.articleImg}>
-          <Link href={`/`}>
-            <Image
-              width={2000}
-              height={2000}
-              src="/images/article1.jpg"
-              alt="category image"
-              className={styles.image}
-            />
-          </Link>
-        </div>
+  const subscribeRef = useRef(null);
+  const nameInputRef = useRef(null);
 
-        <div className={styles.articleInfo}>
-          <Link href={`/`} className={styles.articleCategory}>
-            Categori
-          </Link>
-
-          <h3>
-            <Link href={`/`} className={styles.articleTitle}>
-              Jadwal Indonesia Vs Uzbekistan pada Babak 16 Besar Asian Games
-              2022
-            </Link>
-          </h3>
-
-          <p className={styles.articleWriter}>Ahmaludin</p>
-          <p className={styles.articleDate}>September 24, 2023</p>
-        </div>
-      </>
-    );
+  function goToSubscribeSection() {
+    subscribeRef.current?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => nameInputRef.current?.focus(), 500);
   }
 
   return (
@@ -83,7 +23,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={adobeGaramondPro.style}>
+      <main>
         <header className={styles.header}>
           <Image
             width={2400}
@@ -95,11 +35,32 @@ export default function Home() {
 
           <div className={styles.container}>
             <div className={styles.wrap}>
-              <div className={styles.textContainer}>
-                <p className={styles.welcomeText}>KASIHTAUMAL</p>
-                <h2 className={styles.text}>
-                  LAYANAN INFORMASI DARI BANG AHMAL
+              <div className={styles.contentContainer}>
+                <h2 className={styles.texts}>
+                  <span className={`${styles.text} ${styles.layanan}`}>
+                    layanan&nbsp;
+                  </span>
+                  <span className={`${styles.text} ${styles.informasi}`}>
+                    informasi&nbsp;
+                  </span>
+                  <span className={`${styles.text} ${styles.dari}`}>
+                    dari&nbsp;
+                  </span>
+                  <span className={`${styles.text} ${styles.bang}`}>
+                    bang&nbsp;
+                  </span>
+                  <span className={`${styles.text} ${styles.ahmal}`}>
+                    ahmal
+                  </span>
                 </h2>
+
+                <button
+                  type="button"
+                  className={styles.subsBtn}
+                  onClick={goToSubscribeSection}
+                >
+                  SUBSCIRBE
+                </button>
               </div>
             </div>
           </div>
@@ -195,14 +156,16 @@ export default function Home() {
           </div>
         </section>
 
-        <section className={styles.subscribe}>
+        <section className={styles.subscribe} ref={subscribeRef}>
           <div className={styles.container}>
             <h3 className={styles.sectionTitle}>SUBSCRIBE</h3>
 
             <div className={styles.wrap}>
               <div className={styles.content}>
                 <p className={styles.text}>
-                  Dapatkan notifikasi di setiap update biar ngga ketinggalan!
+                  Dapatkan <span>notifikasi</span> di setiap
+                  <span>&nbsp;update&nbsp;</span>
+                  biar ngga ketinggalan!
                 </p>
 
                 <form className={styles.form}>
@@ -210,7 +173,8 @@ export default function Home() {
                     <input
                       type="text"
                       className={styles.input}
-                      placeholder="kimi no namae wa"
+                      placeholder="nama lengkap"
+                      ref={nameInputRef}
                     />
                   </div>
 
@@ -241,172 +205,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className={styles.mainContent}>
-          <h3 className={styles.sectionTitle}>ARTICLES</h3>
-
-          <div className={styles.articles}>
-            <div className={styles.col1}>
-              <div className={styles.article3}>
-                <div className={styles.articleImg}>
-                  <Link href={`/`}>
-                    <Image
-                      width={2000}
-                      height={2000}
-                      src="/images/article3.jpg"
-                      alt="category image"
-                      className={styles.image}
-                    />
-                  </Link>
-                </div>
-
-                <div className={styles.articleInfo}>
-                  <Link href={`/`} className={styles.articleCategory}>
-                    MAKANAN
-                  </Link>
-
-                  <h3>
-                    <Link href={`/`} className={styles.articleTitle}>
-                      Resep Ayam Bumbu Kemangi, Aromanya Menggugah Selera
-                    </Link>
-                  </h3>
-
-                  <p className={styles.articleWriter}>
-                    Penulis : Elok Dwi Setyaningrum
-                  </p>
-                  <p className={styles.articleDate}>September 14, 2023</p>
-                </div>
-              </div>
-              <div className={styles.article4}>
-                <div className={styles.articleImg}>
-                  <Link href={`/`}>
-                    <Image
-                      width={2000}
-                      height={2000}
-                      src="/images/article4.jpg"
-                      alt="category image"
-                      className={styles.image}
-                    />
-                  </Link>
-                </div>
-
-                <div className={styles.articleInfo}>
-                  <Link href={`/`} className={styles.articleCategory}>
-                    OTOMOTIF
-                  </Link>
-
-                  <h3>
-                    <Link href={`/`} className={styles.articleTitle}>
-                      Alasan Mengapa Toyota Avanza Bekas Tinggi Terus Peminatnya
-                    </Link>
-                  </h3>
-
-                  <p className={styles.articleWriter}>Penulis : Dea</p>
-                  <p className={styles.articleDate}>September 20, 2023</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.col2}>
-              <div className={styles.article1}>
-                <div className={styles.articleImg}>
-                  <Link href={`/`}>
-                    <Image
-                      width={2000}
-                      height={2000}
-                      src="/images/article1.jpg"
-                      alt="category image"
-                      className={styles.image}
-                    />
-                  </Link>
-                </div>
-
-                <div className={styles.articleInfo}>
-                  <Link href={`/`} className={styles.articleCategory}>
-                    SPORT
-                  </Link>
-
-                  <h3>
-                    <Link href={`/`} className={styles.articleTitle}>
-                      Jadwal Indonesia Vs Uzbekistan pada Babak 16 Besar Asian
-                      Games 2022
-                    </Link>
-                  </h3>
-
-                  <p className={styles.articleWriter}>Penulis : Ahmaludin</p>
-                  <p className={styles.articleDate}>September 24, 2023</p>
-                </div>
-              </div>
-              <div className={styles.article2}>
-                <div className={styles.articleImg}>
-                  <Link href={`/`}>
-                    <Image
-                      width={2000}
-                      height={2000}
-                      src="/images/article2.jpg"
-                      alt="category image"
-                      className={styles.image}
-                    />
-                  </Link>
-                </div>
-
-                <div className={styles.articleInfo}>
-                  <Link href={`/`} className={styles.articleCategory}>
-                    ALAM
-                  </Link>
-
-                  <h3>
-                    <Link href={`/`} className={styles.articleTitle}>
-                      Dampak Kebakaran Bromo, Kerugian Capai Rp 89,76 Miliar
-                    </Link>
-                  </h3>
-
-                  <p className={styles.articleWriter}>
-                    Penulis : Neneng Rospita
-                  </p>
-                  <p className={styles.articleDate}>September 23, 2023</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.aside}>
-              <p className={styles.asideTitle}>ARTKEL TERBARU</p>
-
-              <ul>
-                <li>
-                  <Link href={`/`} className={styles.title}>
-                    Rekomendasi Parfum Clean dan Earthy untuk Zodiak Virgo
-                  </Link>
-                  <p className={styles.writer}>Ahmaludin</p>
-                </li>
-                <li>
-                  <Link href={`/`} className={styles.title}>
-                    Marc Marquez: Kalau Saja Tidak Kepleset, Harusnya Bisa
-                    Podium
-                  </Link>
-                  <p className={styles.writer}>Neneng Rospita</p>
-                </li>
-                <li>
-                  <Link href={`/`} className={styles.title}>
-                    Tas Kulit dari Garut Bikin Bule-bule di Italia Jatuh Cinta
-                  </Link>
-                  <p className={styles.writer}>Dea</p>
-                </li>
-                <li>
-                  <Link href={`/`} className={styles.title}>
-                    Kocak! 7 Patung yang Nggak Mirip Sama Aslinya
-                  </Link>
-                  <p className={styles.writer}>Ahmaludin</p>
-                </li>
-                <li>
-                  <Link href={`/`} className={styles.title}>
-                    7 Mobil Terbaru 2023, Harganya Ada yang di Bawah Rp 200 Juta
-                  </Link>
-                  <p className={styles.writer}>Elok Dwi Setyaningrum</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
+        <Articles />
       </main>
     </>
   );

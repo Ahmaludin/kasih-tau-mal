@@ -1,0 +1,61 @@
+@import './mixins';
+@import './colors.module.scss';
+
+.footer {
+  border-top: 5px solid #ededed;
+  padding: 50px 0;
+
+  .content {
+    @include width;
+    display: flex;
+    justify-content: space-between;
+
+    @include mobileLandscape {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .logo {
+      width: 240px;
+      height: 47.96875px;
+      object-fit: cover;
+
+      @include mobileLandscape {
+        width: 144px;
+        height: 28.78125px;
+      }
+    }
+
+    .lists {
+      .title {
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: start;
+
+        li {
+          transition: 300ms;
+          -webkit-transition: 300ms;
+          -moz-transition: 300ms;
+          -ms-transition: 300ms;
+          -o-transition: 300ms;
+        }
+
+        li:hover {
+          color: $textBlue;
+          transform: translateX(7px);
+          -webkit-transform: translateX(7px);
+          -moz-transform: translateX(7px);
+          -ms-transform: translateX(7px);
+          -o-transform: translateX(7px);
+        }
+      }
+    }
+  }
+}

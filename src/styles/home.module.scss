@@ -30,34 +30,82 @@
       margin: auto;
       padding: 0 20px;
 
-      .textContainer {
-        max-width: 50%;
+      .contentContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
 
-        @include tablet {
-          max-width: 100%;
-        }
-        @include mobile {
-          max-width: 100%;
+        .texts {
+          text-align: center;
+
+          .text {
+            color: #fff;
+            font-size: 4rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: default;
+            display: inline-block;
+            transition: 300ms;
+            -webkit-transition: 300ms;
+            -moz-transition: 300ms;
+            -ms-transition: 300ms;
+            -o-transition: 300ms;
+
+            @include tablet {
+              font-size: 2rem;
+            }
+            @include mobile {
+              font-size: 1.5rem;
+            }
+          }
+
+          .text:hover {
+            @media (min-width: 961px) {
+              transform: translateY(-15px);
+              -webkit-transform: translateY(-15px);
+              -moz-transform: translateY(-15px);
+              -ms-transform: translateY(-15px);
+              -o-transform: translateY(-15px);
+            }
+          }
+
+          .bang,
+          .ahmal {
+            color: yellow;
+          }
         }
 
-        .welcomeText {
+        .subsBtn {
           color: #fff;
-        }
-
-        .text {
-          color: #fff;
-          font-size: 3rem;
-          line-height: 3rem;
-
+          background-color: $textRed;
+          font-weight: 600;
+          padding: 10px 20px;
+          border-radius: 5px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          -ms-border-radius: 5px;
+          -o-border-radius: 5px;
+          box-shadow: 1px 4px 20px 0px rgba(0, 0, 0, 0.31);
+          -webkit-box-shadow: 1px 4px 20px 0px rgba(0, 0, 0, 0.31);
+          -moz-box-shadow: 1px 4px 20px 0px rgba(0, 0, 0, 0.31);
+          transition: 300ms;
+          -webkit-transition: 300ms;
+          -moz-transition: 300ms;
+          -ms-transition: 300ms;
+          -o-transition: 300ms;
           @include mobile {
-            font-size: 1.5rem;
-            line-height: 1.5rem;
-          }
-
-          @include smallDevice {
+            padding: 7.5px 15px;
             font-size: 16px;
-            line-height: 16px;
           }
+        }
+
+        .subsBtn:hover {
+          transform: translateY(5px);
+          -webkit-transform: translateY(5px);
+          -moz-transform: translateY(5px);
+          -ms-transform: translateY(5px);
+          -o-transform: translateY(5px);
         }
       }
     }
@@ -116,7 +164,7 @@
       }
 
       .info {
-        font-size: 24px;
+        font-size: 22px;
 
         @include mobileLandscape {
           font-size: 20px;
@@ -195,11 +243,23 @@
           color: #fff;
           font-size: 1.8rem;
           text-transform: uppercase;
+          font-weight: 800;
+
+          span {
+            color: yellow;
+            font-size: 1.8rem;
+
+            @include mobileLandscape {
+              font-size: 1.5rem;
+            }
+            @include mobile {
+              font-size: 20px;
+            }
+          }
 
           @include mobileLandscape {
             font-size: 1.5rem;
           }
-
           @include mobile {
             font-size: 20px;
           }
@@ -240,7 +300,7 @@
           }
 
           .input::placeholder {
-            color: rgba($color: #fff, $alpha: 0.7);
+            color: rgba($color: #fff, $alpha: 0.6);
           }
 
           .button {
@@ -275,223 +335,6 @@
             width: 140px;
             height: 140px;
           }
-        }
-      }
-    }
-  }
-}
-
-.mainContent {
-  @include width;
-
-  .sectionTitle {
-    @include sectionTitle($textDark);
-  }
-
-  .articles {
-    margin-bottom: 32px;
-    display: grid;
-    grid-template-areas: 'col1 col2 col2 aside';
-
-    @include tablet {
-      grid-template-areas:
-        'col1 col2 col2'
-        'aside aside aside';
-    }
-
-    @include mobileLandscape {
-      grid-template-areas:
-        'col2'
-        'col1'
-        'aside';
-    }
-
-    .col1 {
-      grid-area: col1;
-
-      .article3,
-      .article4 {
-        margin-bottom: 15px;
-        padding-bottom: 15px;
-        border-bottom: 2px solid #eee;
-      }
-    }
-
-    .col2 {
-      grid-area: col2;
-      margin: 0 15px;
-      padding: 0 15px;
-      border-left: 2px solid #eee;
-      border-right: 2px solid #eee;
-
-      @include tablet {
-        border-right: none;
-        padding-right: 0;
-        margin-right: 0;
-      }
-
-      @include mobileLandscape {
-        border-left: none;
-        padding-left: 0;
-        margin-left: 0;
-      }
-
-      .article1 {
-        border-bottom: 2px solid #eee;
-        padding-bottom: 15px;
-
-        .articleInfo {
-          .articleTitle {
-            font-size: 2rem;
-
-            @include mobileLandscape {
-              font-size: 1.5rem;
-            }
-
-            @include mobile {
-              font-size: 20px;
-            }
-          }
-        }
-      }
-
-      .article2 {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-        gap: 15px;
-        margin-top: 15px;
-
-        @include mobileLandscape {
-          display: inherit;
-          margin: -15px 0 15px;
-          padding-bottom: 15px;
-          border-bottom: 2px solid #eee;
-        }
-
-        .articleImg {
-          width: 50%;
-          margin-top: 30px;
-
-          @include mobileLandscape {
-            width: 100%;
-          }
-        }
-
-        .articleInfo {
-          width: 50%;
-
-          @include mobileLandscape {
-            width: 100%;
-          }
-        }
-      }
-    }
-
-    .aside {
-      grid-area: aside;
-
-      @include tablet {
-        margin-top: 32px;
-      }
-
-      .asideTitle {
-        color: $textDark;
-        font-weight: 700;
-        margin-bottom: 10px;
-        font-size: 20px;
-      }
-
-      ul {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        li {
-          border-top: 2px solid #eee;
-          padding-top: 10px;
-
-          .title {
-            margin-bottom: 5px;
-            font-weight: 700;
-            color: $textDark;
-          }
-
-          .title:hover {
-            color: $textBlue;
-          }
-
-          .writer {
-            color: $textDark;
-
-            @include mobile {
-              font-size: 15px;
-            }
-          }
-        }
-      }
-    }
-
-    .articleImg {
-      .image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        aspect-ratio: 16/9;
-        transition: 300ms;
-        -webkit-transition: 300ms;
-        -moz-transition: 300ms;
-        -ms-transition: 300ms;
-        -o-transition: 300ms;
-      }
-
-      .image:hover {
-        box-shadow: 0 0 6px rgba($color: #000000, $alpha: 0.5);
-      }
-    }
-
-    .articleInfo {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      gap: 5px;
-
-      .articleCategory {
-        font-size: 15px;
-        color: $textDark;
-      }
-
-      .articleTitle {
-        font-size: 1.5rem;
-        font-weight: 700;
-        @include fontPrimary;
-        color: $textDark;
-
-        @include mobile {
-          font-size: 20px;
-        }
-      }
-
-      .articleCategory:hover,
-      .articleTitle:hover {
-        color: $textBlue;
-      }
-
-      .articleWriter {
-        color: $textDark;
-
-        @include mobile {
-          font-size: 15px;
-        }
-      }
-
-      .articleDate {
-        font-size: 16px;
-        color: #555;
-
-        @include mobile {
-          font-size: 14px;
         }
       }
     }

@@ -3,71 +3,94 @@
 
 .nav {
   background-color: #fff;
-  padding: 25px 0;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999999999;
+  z-index: 97;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  transition: 300ms;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -ms-transition: 300ms;
+  -o-transition: 300ms;
 
-  .top {
-    @include width;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 20px;
-
-    .logo {
-      width: 320px;
-      height: 62.625px;
-      object-fit: cover;
-    }
-
-    .menu,
-    .search {
-      width: 32px;
-      height: 32px;
-    }
+  @include mobileLandscape {
+    height: var(--nav-height-mobile);
   }
 
-  .bottom {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    border-bottom: 2px solid #eee;
+  .container {
+    width: 100%;
+    .top {
+      @include width;
+      display: grid;
+      grid-template-areas: 'menu logo search';
+      justify-content: space-between;
+      border-bottom: 2px solid #eee;
+      align-items: center;
 
-    .border {
-      width: 100%;
-      height: 3px;
-      background-color: #777;
-    }
-
-    li {
-      padding: 15px 0 0;
-      cursor: pointer;
-
-      .title {
-        margin-bottom: 12px;
+      @include mobileLandscape {
+        grid-template-areas: 'logo search menu';
+        grid-template-columns: 10fr 1fr 1fr;
+        border-bottom: none;
+        gap: 10px;
       }
 
-      .dropdownSymbol {
-        margin-top: -4px;
+      @include mobile {
+        gap: 10px;
       }
 
-      .dropdownContent {
-        background-color: lime;
-        position: absolute;
-        bottom: -190px;
-        left: 0;
-        width: 240px;
-      }
-    }
+      .containerLogo {
+        grid-area: logo;
 
-    li.listWithDropdown {
-      display: flex;
-      gap: 5px;
-      position: relative;
+        .logo {
+          width: 240px;
+          height: 47.96875px;
+          object-fit: cover;
+
+          @include mobileLandscape {
+            width: 144px;
+            height: 28.78125px;
+          }
+        }
+      }
+
+      .containerMenu {
+        grid-area: menu;
+        cursor: pointer;
+        display: none;
+
+        @include mobileLandscape {
+          display: inherit;
+          justify-self: end;
+        }
+      }
+
+      .containerSearch {
+        grid-area: search;
+        cursor: pointer;
+
+        @include mobileLandscape {
+          justify-self: end;
+        }
+
+        @include mobile {
+          justify-self: center;
+        }
+      }
+
+      .menu,
+      .search {
+        width: 32px;
+        height: 32px;
+
+        @include mobileLandscape {
+          width: 24px;
+          height: 24px;
+        }
+      }
     }
   }
 }

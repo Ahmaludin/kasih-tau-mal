@@ -1,148 +1,82 @@
 import styles from '../styles/nav.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import Menus from './Menus';
+import { useEffect, useRef, useState } from 'react';
+import disableScroll from '@/utils/disableScroll';
 
-export default function Nav() {
-  const router = useRouter();
-  const route = router.route;
-  const query = router.query;
+export default function Nav(props) {
+  const searchRef = props.searchRef;
+  const mobileMenuRef = props.mobileMenuRef;
+  const inputSearchRef = props.inputSearchRef;
 
-  const [gamingDropdownActive, setGamingDropdownActive] = useState(false);
-  const [sportDropdownActive, setSportDropdownActive] = useState(false);
-  const [categoriesDropdownActive, setCategoriesDropdownActive] =
-    useState(false);
+  const [lastScroll, setLastScroll] = useState(0);
 
-  function dropdownActive(type) {
-    type === 'categories'
-      ? setCategoriesDropdownActive(true)
-      : type === 'gaming'
-      ? setGamingDropdownActive(true)
-      : type === 'sport' && setSportDropdownActive(true);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      lastScroll < window.scrollY
+        ? navRef.current?.classList.add('navHidden')
+        : navRef.current?.classList.remove('navHidden');
+
+      setLastScroll(window.scrollY);
+    };
+
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  });
+
+  function showSearch() {
+    disableScroll();
+    searchRef.current?.classList.add('showSearch');
+    inputSearchRef.current.focus();
   }
 
-  function dropdownNonActive(type) {
-    type === 'categories'
-      ? setCategoriesDropdownActive(false)
-      : type === 'gaming'
-      ? setGamingDropdownActive(false)
-      : type === 'sport' && setSportDropdownActive(false);
+  function showMobileMenu() {
+    disableScroll();
+    mobileMenuRef.current?.classList.add('showMobileMenu');
   }
 
   return (
-    <nav className={styles.nav}>
-      <div className={styles.top}>
-        <Link href={`/`}>
-          <Image
-            width={512}
-            height={512}
-            src="/icons/menu.png"
-            alt="menu"
-            className={styles.menu}
-          />
-        </Link>
+    <nav className={styles.nav} ref={navRef}>
+      <div className={styles.container}>
+        <div className={styles.top}>
+          <div className={styles.containerMenu} onClick={showMobileMenu}>
+            <Image
+              width={512}
+              height={512}
+              src="/icons/menu.svg"
+              alt="menu"
+              className={styles.menu}
+            />
+          </div>
 
-        <Link href={`/`}>
-          <Image
-            width={2560}
-            height={501}
-            src="/images/logo.png"
-            alt="kasihtaumal logo"
-            className={styles.logo}
-          />
-        </Link>
+          <div href={`/`} className={styles.containerLogo}>
+            <Link href={`/`}>
+              <Image
+                width={2560}
+                height={501}
+                src="/images/logo.png"
+                alt="kasihtaumal logo"
+                className={styles.logo}
+              />
+            </Link>
+          </div>
 
-        <Link href={`/`}>
-          <Image
-            width={512}
-            height={512}
-            src="/icons/search.png"
-            alt="search"
-            className={styles.search}
-          />
-        </Link>
+          <div className={styles.containerSearch} onClick={showSearch}>
+            <Image
+              width={512}
+              height={512}
+              src="/icons/search.svg"
+              alt="search"
+              className={styles.search}
+            />
+          </div>
+        </div>
+
+        <Menus />
       </div>
-
-      <ul className={styles.bottom}>
-        <li>
-          <Link href={`/`}>
-            <p className={styles.title}>HOME</p>
-            {route === '/' && <div className={styles.border} />}
-          </Link>
-        </li>
-
-        <li>
-          <Link href={`/about`}>
-            <p className={styles.title}>ABOUT</p>
-            {route === '/about' && <div className={styles.border} />}
-          </Link>
-        </li>
-
-        <li
-          className={styles.listWithDropdown}
-          onMouseEnter={() => dropdownActive('categories')}
-          onMouseLeave={() => dropdownNonActive('categories')}
-        >
-          <p className={styles.title}>CATEGORIES</p>
-          <span className={styles.dropdownSymbol}>&#9207;</span>
-
-          {categoriesDropdownActive && (
-            <div className={styles.dropdownContent}>
-              <h3>CATEGORIES</h3>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos,
-              fugiat in est unde eius quibusdam libero dolor harum aperiam,
-              praesentium dignissimos dolores reiciendis voluptate autem
-              excepturi ad magnam quae. Beatae!
-            </div>
-          )}
-        </li>
-
-        <li>
-          <Link href={`/trending`}>
-            <p className={styles.title}>TRENDING</p>
-            {route === '/trending' && <div className={styles.border} />}
-          </Link>
-        </li>
-
-        <li
-          className={styles.listWithDropdown}
-          onMouseEnter={() => dropdownActive('gaming')}
-          onMouseLeave={() => dropdownNonActive('gaming')}
-        >
-          <p className={styles.title}>GAMING</p>
-          <span className={styles.dropdownSymbol}>&#9207;</span>
-
-          {gamingDropdownActive && (
-            <div className={styles.dropdownContent}>
-              <h3>GAMING</h3>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos,
-              fugiat in est unde eius quibusdam libero dolor harum aperiam,
-              praesentium dignissimos dolores reiciendis voluptate autem
-              excepturi ad magnam quae. Beatae!
-            </div>
-          )}
-        </li>
-
-        <li
-          className={styles.listWithDropdown}
-          onMouseEnter={() => dropdownActive('sport')}
-          onMouseLeave={() => dropdownNonActive('sport')}
-        >
-          <p className={styles.title}>SPORT</p>
-          <span className={styles.dropdownSymbol}>&#9207;</span>
-
-          {sportDropdownActive && (
-            <div className={styles.dropdownContent}>
-              <h3>SPORT</h3>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos,
-              fugiat in est unde eius quibusdam libero dolor harum aperiam,
-              praesentium dignissimos dolores reiciendis voluptate autem
-              excepturi ad magnam quae. Beatae!
-            </div>
-          )}
-        </li>
-      </ul>
     </nav>
   );
 }
