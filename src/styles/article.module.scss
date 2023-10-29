@@ -64,6 +64,14 @@
           display: inline-block;
         }
       }
+
+      ol,
+      ul {
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
     }
 
     .info {

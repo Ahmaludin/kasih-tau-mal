@@ -210,3 +210,11 @@ export default function Home() {
     </>
   );
 }
+
+// IDEA LISTS
+
+// benerin backend agar menerima label mobile-legends
+
+// buat shadow nav
+
+// di halaman article, di tengah konten dibuat box rekomendasi artikle yang berhubungan dengan artikle tsb berdasarkan label, di backend data nya dikirim bareng dengan artikel tsb
