@@ -92,7 +92,7 @@ export default function Layout({ children }) {
           <p className={styles.categories}>
             {categories.map((category, i) => (
               <>
-                <span className={styles.text}>
+                <span className={styles.text} key={i}>
                   <Link href={`/`} className={styles.link} key={i}>
                     {category}
                   </Link>
