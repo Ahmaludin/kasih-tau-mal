@@ -41,8 +41,8 @@ export default function Nav(props) {
   }
 
   function showMobileMenu() {
-    disableScroll();
-    mobileMenuRef.current?.classList.add('showMobileMenu');
+    document.body.style.overflowY = 'hidden';
+    mobileMenuRef.current.style.display = 'inherit';
   }
 
   return (

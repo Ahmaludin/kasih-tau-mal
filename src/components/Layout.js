@@ -2,32 +2,11 @@ import Footer from './Footer.js';
 import Nav from './Nav.js';
 import styles from '../styles/layout.module.scss';
 import { useEffect, useRef, useState } from 'react';
-import localFont from 'next/font/local';
 import Link from 'next/link.js';
 import unableScroll from '@/utils/unableScroll.js';
 import Img from './Img.js';
 import { Poppins } from 'next/font/google';
-
-const proximaNova = localFont({
-  src: [
-    {
-      path: '../../public/fonts/ProximaNova-Regular.woff',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/ProximaNova-Semibold.woff',
-      weight: '600',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/ProximaNova-Bold.woff',
-      weight: '800',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-proxima-nova',
-});
+import Image from 'next/image.js';
 
 const poppins = Poppins({
   weight: ['400', '600', '700', '800'],
@@ -56,8 +35,8 @@ export default function Layout({ children }) {
   }
 
   function hiddenMobileMenu() {
-    unableScroll();
-    mobileMenuRef.current?.classList.remove('showMobileMenu');
+    document.body.style.overflowY = 'auto';
+    mobileMenuRef.current.style.display = 'none';
   }
 
   function searching() {
@@ -109,30 +88,31 @@ export default function Layout({ children }) {
       </section>
 
       <section className={styles.mobileMenu} ref={mobileMenuRef}>
-        <div className={styles.container}>
-          <div className={styles.content}>
+        <div className={styles.closeBackground} onClick={hiddenMobileMenu} />
+
+        <div className={styles.content}>
+          <p className={styles.title}>Categories</p>
+
+          <div className={styles.listContainer}>
             <ul>
-              <li>
-                <Link href={`/`}>HOME</Link>
-              </li>
-              <li>
-                <Link href={`/`}>ABOUT</Link>
-              </li>
-              <li>
-                <Link href={`/`}>CATEGORIES</Link>
-              </li>
-              <li>
-                <Link href={`/`}>TRENDING</Link>
-              </li>
-              <li>
-                <Link href={`/`}>GAMING</Link>
-              </li>
-              <li>
-                <Link href={`/`}>SPORT</Link>
-              </li>
+              {categories.map((category, i) => (
+                <li key={i}>
+                  <Link
+                    href={`/category/${category.replace(' ', '-')}`}
+                    onClick={hiddenMobileMenu}
+                  >
+                    <Image
+                      src={'/icons/label.svg'}
+                      height={16}
+                      width={16}
+                      alt={'tag icon'}
+                    />
+                    <p>{category}</p>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
-          <div className={styles.closeBackground} onClick={hiddenMobileMenu} />
         </div>
       </section>
 
