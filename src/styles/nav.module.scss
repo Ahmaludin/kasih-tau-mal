@@ -2,7 +2,7 @@
 @import './colors.module.scss';
 
 .nav {
-  background-color: #fff;
+  background-color: $lightColor;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,6 +16,7 @@
   -moz-transition: 300ms;
   -ms-transition: 300ms;
   -o-transition: 300ms;
+  box-shadow: 0 5px 15px rgba($color: #000000, $alpha: 0.1);
 
   @include mobileLandscape {
     height: var(--nav-height-mobile);
@@ -23,12 +24,13 @@
 
   .container {
     width: 100%;
+
     .top {
       @include width;
       display: grid;
       grid-template-areas: 'menu logo search';
       justify-content: space-between;
-      border-bottom: 2px solid #eee;
+      border-bottom: 1px solid $textDark;
       align-items: center;
 
       @include mobileLandscape {
@@ -42,17 +44,17 @@
         gap: 10px;
       }
 
-      .containerLogo {
+      .logo {
         grid-area: logo;
 
-        .logo {
-          width: 240px;
-          height: 47.96875px;
-          object-fit: cover;
+        h1 {
+          font-size: 28px;
+          font-weight: bold;
+          padding-bottom: 10px;
 
           @include mobileLandscape {
-            width: 144px;
-            height: 28.78125px;
+            padding: 0;
+            font-size: 20px;
           }
         }
       }

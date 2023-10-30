@@ -2,61 +2,77 @@
 @import './colors.module.scss';
 
 .footer {
-  border-top: 5px solid #ededed;
-  padding: 50px 0;
-  background-color: #fff;
-
   .content {
     @include width;
-    display: flex;
-    justify-content: space-between;
+    @include desktop;
+  }
 
-    @include mobileLandscape {
-      flex-direction: column;
-      gap: 40px;
-    }
+  .container:nth-child(1) {
+    background-color: $textDark;
+    padding: 50px 0;
 
-    .logo {
-      width: 240px;
-      height: 47.96875px;
-      object-fit: cover;
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 30px;
 
-      @include mobileLandscape {
-        width: 144px;
-        height: 28.78125px;
-      }
-    }
-
-    .lists {
-      .title {
-        margin-bottom: 20px;
-        font-weight: 600;
-      }
-
-      ul {
-        list-style: none;
+      @include tablet {
         display: flex;
         flex-direction: column;
-        gap: 15px;
-        align-items: start;
+      }
 
-        li {
-          text-transform: capitalize;
-          transition: 300ms;
-          -webkit-transition: 300ms;
-          -moz-transition: 300ms;
-          -ms-transition: 300ms;
-          -o-transition: 300ms;
+      .logo h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: $lightColor;
+      }
+
+      .categories {
+        p {
+          margin-bottom: 20px;
+          border-bottom: 1px solid $lightColor;
+          padding-bottom: 5px;
+          color: $lightColor;
         }
 
-        li:hover {
-          color: $textBlue;
-          transform: translateX(7px);
-          -webkit-transform: translateX(7px);
-          -moz-transform: translateX(7px);
-          -ms-transform: translateX(7px);
-          -o-transform: translateX(7px);
+        ul {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          row-gap: 10px;
+
+          @include mobile {
+            grid-template-columns: 1fr;
+          }
+
+          li a {
+            text-transform: capitalize;
+            font-size: 16px;
+            color: $lightColor;
+          }
+
+          a:hover {
+            border-bottom: 1px solid $lightColor;
+          }
         }
+      }
+    }
+  }
+
+  .container:nth-child(2) {
+    background-color: #000;
+
+    .content {
+      padding: 10px 0;
+
+      p,
+      span {
+        font-size: 14px;
+        color: rgba($color: $lightColor, $alpha: 0.8);
+        text-align: center;
+      }
+
+      span {
+        text-decoration: line-through;
       }
     }
   }

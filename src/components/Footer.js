@@ -1,26 +1,14 @@
-import styles from '../styles/footer.module.scss';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import localFont from 'next/font/local';
 
-const gamingLists = [
-  'mobile legends',
-  'pubg',
-  'valorant',
-  'point blank',
-  'free fire',
-  'genshin impact',
-  'csgo',
-  'minecraft',
-];
+import styles from '../styles/footer.module.scss';
 
-const sportLists = [
-  'sepak bola',
-  'futsal',
-  'tenis meja',
-  'sepak takraw',
-  'bulu tangkis',
-];
+const montage = localFont({
+  src: '../../public/fonts/MontageSerifFont-Regular.otf',
+  weight: '400',
+  style: 'normal',
+});
 
 const categories = [
   'gaming',
@@ -29,10 +17,13 @@ const categories = [
   'otomotif',
   'entertainment',
   'lifestyle',
+  'tech',
+  'tutorial',
 ];
 
 export default function Footer() {
   const footerRef = useRef(null);
+
   useEffect(() => {
     if (footerRef.current) {
       const height = getComputedStyle(footerRef.current).getPropertyValue(
@@ -44,61 +35,33 @@ export default function Footer() {
 
   return (
     <footer className={styles.footer} ref={footerRef}>
-      <div className={styles.content}>
-        {/* Logo */}
-        <Link href={`/`}>
-          <Image
-            width={2560}
-            height={501}
-            src="/images/logo.png"
-            alt="kasihtaumal logo"
-            className={styles.logo}
-          />
-        </Link>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <Link href={`/`} className={styles.logo}>
+            <h1 style={montage.style}>KASIHTAUMAL</h1>
+          </Link>
 
-        {/* Categories */}
-        <div className={styles.lists}>
-          <p className={styles.title}>CATEGORIES</p>
+          <div className={styles.categories}>
+            <p>CATEGORIES</p>
 
-          <ul>
-            {categories.map((category, i) => (
-              <li key={i}>
-                <Link href={`/category/${category.replace(' ', '-')}`}>
-                  {category}
-                </Link>
-              </li>
-            ))}
-          </ul>
+            <ul>
+              {categories.map((category, i) => (
+                <li key={i}>
+                  <Link href={`/category/${category.replace(' ', '-')}`}>
+                    {category}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+      </div>
 
-        {/* Gaming */}
-        <div className={styles.lists}>
-          <p className={styles.title}>GAMING</p>
-
-          <ul>
-            {gamingLists.map((category, i) => (
-              <li key={i}>
-                <Link href={`/category/${category.replace(' ', '-')}`}>
-                  {category}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Sports */}
-        <div className={styles.lists}>
-          <p className={styles.title}>SPORT</p>
-
-          <ul>
-            {sportLists.map((category, i) => (
-              <li key={i}>
-                <Link href={`/category/${category.replace(' ', '-')}`}>
-                  {category}
-                </Link>
-              </li>
-            ))}
-          </ul>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <p>
+            Made with <span>love&#128151;</span> emotions, by @ahmaludin
+          </p>
         </div>
       </div>
     </footer>

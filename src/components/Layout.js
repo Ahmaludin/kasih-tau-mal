@@ -6,6 +6,7 @@ import localFont from 'next/font/local';
 import Link from 'next/link.js';
 import unableScroll from '@/utils/unableScroll.js';
 import Img from './Img.js';
+import { Poppins } from 'next/font/google';
 
 const proximaNova = localFont({
   src: [
@@ -26,6 +27,11 @@ const proximaNova = localFont({
     },
   ],
   variable: '--font-proxima-nova',
+});
+
+const poppins = Poppins({
+  weight: ['400', '600', '700', '800'],
+  subsets: ['latin'],
 });
 
 export default function Layout({ children }) {
@@ -59,7 +65,7 @@ export default function Layout({ children }) {
   }
 
   return (
-    <main style={proximaNova.style}>
+    <main className={poppins.className}>
       <section className={styles.search} ref={searchRef}>
         <button
           type="button"

@@ -1,9 +1,16 @@
 import styles from '../styles/nav.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import localFont from 'next/font/local';
 import Menus from './Menus';
 import { useEffect, useRef, useState } from 'react';
 import disableScroll from '@/utils/disableScroll';
+
+const montage = localFont({
+  src: '../../public/fonts/MontageSerifFont-Regular.otf',
+  weight: '400',
+  style: 'normal',
+});
 
 export default function Nav(props) {
   const searchRef = props.searchRef;
@@ -52,17 +59,9 @@ export default function Nav(props) {
             />
           </div>
 
-          <div href={`/`} className={styles.containerLogo}>
-            <Link href={`/`}>
-              <Image
-                width={2560}
-                height={501}
-                src="/images/logo.png"
-                alt="kasihtaumal logo"
-                className={styles.logo}
-              />
-            </Link>
-          </div>
+          <Link href={`/`} className={styles.logo}>
+            <h1 style={montage.style}>KASIHTAUMAL</h1>
+          </Link>
 
           <div className={styles.containerSearch} onClick={showSearch}>
             <Image
