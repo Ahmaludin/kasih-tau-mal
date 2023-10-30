@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import HomeArticles from '@/components/HomeArticles';
 
-export default function Home() {
+export default function Home(props) {
   const subscribeRef = useRef(null);
   const nameInputRef = useRef(null);
 
@@ -205,16 +205,26 @@ export default function Home() {
           </div>
         </section>
 
-        <HomeArticles />
+        <HomeArticles data={props.data} />
       </main>
     </>
   );
 }
 
+export async function getServerSideProps() {
+  const response = await fetch(`${process.env.API_HOST}articles-home?page=1`);
+  const data = await response.json();
+
+  return { props: { data } };
+}
+
 // IDEA LISTS
 
-// benerin backend agar menerima label mobile-legends
+// buat halaman 404, buat agar tinngi dan lebar sesuai layar
 
-// buat shadow nav
+// buat shadow nav & perbagus nav
+// perbagus footer
 
 // di halaman article, di tengah konten dibuat box rekomendasi artikle yang berhubungan dengan artikle tsb berdasarkan label, di backend data nya dikirim bareng dengan artikel tsb
+
+// di halaman article bagianbawah buat related article

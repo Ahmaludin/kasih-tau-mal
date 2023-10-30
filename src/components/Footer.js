@@ -1,33 +1,51 @@
 import styles from '../styles/footer.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import localFont from 'next/font/local';
+import { useEffect, useRef } from 'react';
 
-const proximaNova = localFont({
-  src: [
-    {
-      path: '../../public/fonts/ProximaNova-Regular.woff',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/ProximaNova-Semibold.woff',
-      weight: '600',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/ProximaNova-Bold.woff',
-      weight: '800',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-proxima-nova',
-});
+const gamingLists = [
+  'mobile legends',
+  'pubg',
+  'valorant',
+  'point blank',
+  'free fire',
+  'genshin impact',
+  'csgo',
+  'minecraft',
+];
+
+const sportLists = [
+  'sepak bola',
+  'futsal',
+  'tenis meja',
+  'sepak takraw',
+  'bulu tangkis',
+];
+
+const categories = [
+  'gaming',
+  'sport',
+  'makanan',
+  'otomotif',
+  'entertainment',
+  'lifestyle',
+];
 
 export default function Footer() {
+  const footerRef = useRef(null);
+  useEffect(() => {
+    if (footerRef.current) {
+      const height = getComputedStyle(footerRef.current).getPropertyValue(
+        'height'
+      );
+      document.body.style.setProperty('--footer-height', height);
+    }
+  }, [footerRef]);
+
   return (
-    <footer className={styles.footer} style={proximaNova.style}>
+    <footer className={styles.footer} ref={footerRef}>
       <div className={styles.content}>
+        {/* Logo */}
         <Link href={`/`}>
           <Image
             width={2560}
@@ -43,18 +61,13 @@ export default function Footer() {
           <p className={styles.title}>CATEGORIES</p>
 
           <ul>
-            <li>
-              <Link href={`/`}>Gaming</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Entertainment</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Sport</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Lifestyle</Link>
-            </li>
+            {categories.map((category, i) => (
+              <li key={i}>
+                <Link href={`/category/${category.replace(' ', '-')}`}>
+                  {category}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -63,30 +76,13 @@ export default function Footer() {
           <p className={styles.title}>GAMING</p>
 
           <ul>
-            <li>
-              <Link href={`/`}>Mobile Legend</Link>
-            </li>
-            <li>
-              <Link href={`/`}>PUBG</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Valorant</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Point Blank</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Free Fire</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Genshin Impact</Link>
-            </li>
-            <li>
-              <Link href={`/`}>CSGO</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Minecraft</Link>
-            </li>
+            {gamingLists.map((category, i) => (
+              <li key={i}>
+                <Link href={`/category/${category.replace(' ', '-')}`}>
+                  {category}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -95,21 +91,13 @@ export default function Footer() {
           <p className={styles.title}>SPORT</p>
 
           <ul>
-            <li>
-              <Link href={`/`}>Sepak Bola</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Futsal</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Tenis Meja</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Sepak Takraw</Link>
-            </li>
-            <li>
-              <Link href={`/`}>Bulu Tangkis</Link>
-            </li>
+            {sportLists.map((category, i) => (
+              <li key={i}>
+                <Link href={`/category/${category.replace(' ', '-')}`}>
+                  {category}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
