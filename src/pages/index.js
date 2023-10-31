@@ -32,11 +32,12 @@ export async function getServerSideProps() {
   return { props: { data } };
 }
 
-// buat page About, contacts, privacy policy, Terms $ Conditions,
-// bagusin mobile menu
+// fitur search
+// fitur subscribe
+// fitur contact
 
 // IDEA LISTS
 
 // di halaman article, di tengah konten dibuat box rekomendasi artikle yang berhubungan dengan artikle tsb berdasarkan label, di backend data nya dikirim bareng dengan artikel tsb
 
-// di halaman article bagianbawah buat related article
+// di halaman article bagian bawah buat related article
