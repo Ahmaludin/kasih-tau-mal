@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Header from '@/components/Header';
 import HomeArticles from '@/components/HomeArticles';
 import Subscribe from '@/components/Subscribe';
-import Categories from '@/components/Categories';
+import CategoriesHome from '@/components/CategoriesHome';
 
 export default function Home(props) {
   return (
@@ -17,7 +17,7 @@ export default function Home(props) {
 
       <main>
         <Header />
-        <Categories />
+        <CategoriesHome />
         <Subscribe />
         <HomeArticles data={props.data} />
       </main>
@@ -31,10 +31,6 @@ export async function getServerSideProps() {
 
   return { props: { data } };
 }
-
-// basckend search rubah jadi paginate articles
-// rubah fetch search halaman search karena ada paginate kan, jadi ada query page dan limit
-// buat halaman search list mirip category page
 
 // fitur subscribe
 

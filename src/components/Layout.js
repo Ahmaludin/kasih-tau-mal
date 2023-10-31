@@ -36,7 +36,7 @@ export default function Layout({ children }) {
   const searching = useCallback(async () => {
     if (searchInput) {
       const response = await fetch(
-        `${process.env.API_HOST}articles/search/${searchInput}`
+        `${process.env.API_HOST}articles/search/${searchInput}?page=1&limit=5`
       );
       const data = await response.json();
 
@@ -102,7 +102,7 @@ export default function Layout({ children }) {
               {data && data.status === true && (
                 <div className={styles.resultLists}>
                   <ul>
-                    {data.articles.map((article) => {
+                    {data.articles.docs.map((article) => {
                       return (
                         <li key={article._id} onClick={hiddenSearch}>
                           <Link
@@ -116,14 +116,16 @@ export default function Layout({ children }) {
                     })}
                   </ul>
 
-                  <p className={styles.moreLink}>
-                    <Link
-                      href={`/search/${searchInput}`}
-                      onClick={hiddenSearch}
-                    >
-                      Lihat selengkapnya...
-                    </Link>
-                  </p>
+                  {data.articles.hasNextPage && (
+                    <p className={styles.moreLink}>
+                      <Link
+                        href={`/search/${searchInput}`}
+                        onClick={hiddenSearch}
+                      >
+                        Lihat selengkapnya...
+                      </Link>
+                    </p>
+                  )}
                 </div>
               )}
 
@@ -137,7 +139,12 @@ export default function Layout({ children }) {
             <p className={styles.categories}>
               {categories.map((category, i) => (
                 <span className={styles.text} key={i}>
-                  <Link href={`/`} className={styles.link} key={i}>
+                  <Link
+                    href={`/category/${category}`}
+                    className={styles.link}
+                    key={i}
+                    onClick={hiddenSearch}
+                  >
                     {category}
                   </Link>
                   {i < categories.length - 1 && ' / '}
