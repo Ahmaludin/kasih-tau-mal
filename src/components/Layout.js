@@ -1,7 +1,7 @@
 import Footer from './Footer.js';
 import Nav from './Nav.js';
 import styles from '../styles/layout.module.scss';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link.js';
 import unableScroll from '@/utils/unableScroll.js';
 import Img from './Img.js';
@@ -18,6 +18,9 @@ export default function Layout({ children }) {
   const mobileMenuRef = useRef(null);
   const inputSearchRef = useRef(null);
 
+  const [data, setData] = useState(null);
+  const [searchInput, setSearchInput] = useState('');
+
   const categories = [
     'gaming',
     'sport',
@@ -29,18 +32,36 @@ export default function Layout({ children }) {
     'tutorial',
   ];
 
+  const delayRef = useRef(null);
+  const searching = useCallback(async () => {
+    if (searchInput) {
+      const response = await fetch(
+        `${process.env.API_HOST}articles/search/${searchInput}`
+      );
+      const data = await response.json();
+
+      setData(data);
+    } else {
+      setData(null);
+    }
+  }, [searchInput]);
+
+  useEffect(() => {
+    clearTimeout(delayRef.current);
+    delayRef.current = setTimeout(searching, 300);
+    return () => clearTimeout(delayRef.current);
+  }, [searchInput, searching]);
+
   function hiddenSearch() {
     unableScroll();
     searchRef.current?.classList.remove('showSearch');
+    setSearchInput('');
+    setData(null);
   }
 
   function hiddenMobileMenu() {
     document.body.style.overflowY = 'auto';
     mobileMenuRef.current.style.display = 'none';
-  }
-
-  function searching() {
-    //
   }
 
   return (
@@ -61,29 +82,69 @@ export default function Layout({ children }) {
               placeholder="Cari"
               className={styles.input}
               ref={inputSearchRef}
+              onChange={(e) => setSearchInput(e.target.value)}
+              value={searchInput}
             />
 
-            <button
-              type="submit"
-              onClick={searching}
-              className={styles.inputSubmitBtn}
-            >
-              <Img src={'/icons/search.svg'} alt={'search'} />
-            </button>
+            {searchInput && (
+              <button
+                type="button"
+                onClick={() => setSearchInput('')}
+                className={styles.clearBtn}
+              >
+                <Img src={'/icons/close.svg'} alt={'input clear icon'} />
+              </button>
+            )}
           </form>
 
-          <p className={styles.title}>cari berdasarkan kategori</p>
+          <div className={styles.bottom}>
+            <div className={styles.results}>
+              {data && data.status === true && (
+                <div className={styles.resultLists}>
+                  <ul>
+                    {data.articles.map((article) => {
+                      return (
+                        <li key={article._id} onClick={hiddenSearch}>
+                          <Link
+                            href={`/article/${article.permalink}`}
+                            className={styles.articleLink}
+                          >
+                            {article.title}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
 
-          <p className={styles.categories}>
-            {categories.map((category, i) => (
-              <span className={styles.text} key={i}>
-                <Link href={`/`} className={styles.link} key={i}>
-                  {category}
-                </Link>
-                {i < categories.length - 1 && ' / '}
-              </span>
-            ))}
-          </p>
+                  <p className={styles.moreLink}>
+                    <Link
+                      href={`/search/${searchInput}`}
+                      onClick={hiddenSearch}
+                    >
+                      Lihat selengkapnya...
+                    </Link>
+                  </p>
+                </div>
+              )}
+
+              {data && data.status === false && (
+                <p className={styles.noResults}>Tidak ada hasil</p>
+              )}
+            </div>
+
+            <p className={styles.title}>cari berdasarkan kategori</p>
+
+            <p className={styles.categories}>
+              {categories.map((category, i) => (
+                <span className={styles.text} key={i}>
+                  <Link href={`/`} className={styles.link} key={i}>
+                    {category}
+                  </Link>
+                  {i < categories.length - 1 && ' / '}
+                </span>
+              ))}
+            </p>
+          </div>
         </div>
       </section>
 

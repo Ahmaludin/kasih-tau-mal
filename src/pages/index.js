@@ -32,9 +32,11 @@ export async function getServerSideProps() {
   return { props: { data } };
 }
 
-// fitur search
+// basckend search rubah jadi paginate articles
+// rubah fetch search halaman search karena ada paginate kan, jadi ada query page dan limit
+// buat halaman search list mirip category page
+
 // fitur subscribe
-// fitur contact
 
 // IDEA LISTS
 
