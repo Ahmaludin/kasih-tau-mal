@@ -31,7 +31,7 @@
       grid-template-areas: 'menu logo search';
       justify-content: space-between;
       border-bottom: 1px solid $textDark;
-      align-items: center;
+      // align-items: center;
 
       @include mobileLandscape {
         grid-template-areas: 'logo search menu';
