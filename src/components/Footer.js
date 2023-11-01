@@ -37,9 +37,23 @@ export default function Footer() {
     <footer className={styles.footer} ref={footerRef}>
       <div className={styles.container}>
         <div className={styles.content}>
-          <Link href={`/`} className={styles.logo}>
-            <h1 style={montage.style}>KASIHTAUMAL</h1>
-          </Link>
+          <div className={styles.main}>
+            <Link href={`/`} className={styles.logo}>
+              <h1 style={montage.style}>KASIHTAUMAL</h1>
+            </Link>
+
+            <ul>
+              <li>
+                <Link href={'/disclaimer'}>Disclaimer</Link>
+              </li>
+              <li>
+                <Link href={'/privacy-policy'}>Privacy Policy</Link>
+              </li>
+              <li>
+                <Link href={'/terms-and-conditions'}>Terms & Conditions</Link>
+              </li>
+            </ul>
+          </div>
 
           <div className={styles.categories}>
             <p>CATEGORIES</p>
