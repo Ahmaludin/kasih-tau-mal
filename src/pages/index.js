@@ -32,9 +32,6 @@ export async function getServerSideProps() {
   return { props: { data } };
 }
 
-// benerin image homearticle
-// button css reset
-
 // IDEA LISTS
 
 // di halaman article, di tengah konten dibuat box rekomendasi artikle yang berhubungan dengan artikle tsb berdasarkan label, di backend data nya dikirim bareng dengan artikel tsb
