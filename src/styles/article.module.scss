@@ -105,33 +105,28 @@
           justify-content: center;
         }
 
-        .shareBtn {
-          background-color: #fff;
-          padding: 10px;
+        .shareLink {
+          width: 48px;
+          height: 48px;
+          box-shadow: 0 5px 10px rgba($color: $textDark, $alpha: 0.3);
           border-radius: 5px;
           -webkit-border-radius: 5px;
           -moz-border-radius: 5px;
           -ms-border-radius: 5px;
           -o-border-radius: 5px;
-          box-shadow: 0 5px 15px rgba($color: #000000, $alpha: 0.1);
-
-          @include mobile {
-            box-shadow: 0 2.5px 7.5px rgba($color: #000000, $alpha: 0.1);
-          }
-
-          .iconContainer {
-            position: relative;
-            width: 28px;
-            aspect-ratio: 1;
-
-            @include mobile {
-              width: 20px;
-            }
-          }
+          transition: 300ms;
+          -webkit-transition: 300ms;
+          -moz-transition: 300ms;
+          -ms-transition: 300ms;
+          -o-transition: 300ms;
         }
 
-        .shareBtn:hover {
-          box-shadow: 0 5px 15px rgba($color: #000000, $alpha: 0.17);
+        .shareLink:hover {
+          transform: translateY(-2px);
+          -webkit-transform: translateY(-2px);
+          -moz-transform: translateY(-2px);
+          -ms-transform: translateY(-2px);
+          -o-transform: translateY(-2px);
         }
       }
     }
