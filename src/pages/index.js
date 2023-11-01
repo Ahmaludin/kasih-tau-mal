@@ -32,7 +32,8 @@ export async function getServerSideProps() {
   return { props: { data } };
 }
 
-// fitur subscribe
+// benerin image homearticle
+// button css reset
 
 // IDEA LISTS
 
