@@ -32,6 +32,9 @@ export async function getServerSideProps() {
   return { props: { data } };
 }
 
+// buat meta head
+// favicon dan judul tiap halaman
+
 // IDEA LISTS
 
 // di halaman article, di tengah konten dibuat box rekomendasi artikle yang berhubungan dengan artikle tsb berdasarkan label, di backend data nya dikirim bareng dengan artikel tsb

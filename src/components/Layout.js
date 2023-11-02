@@ -20,6 +20,7 @@ export default function Layout({ children }) {
 
   const [data, setData] = useState(null);
   const [searchInput, setSearchInput] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const categories = [
     'gaming',
@@ -32,6 +33,15 @@ export default function Layout({ children }) {
     'tutorial',
   ];
 
+  useEffect(() => {
+    if (searchInput) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+      setData(null);
+    }
+  }, [searchInput]);
+
   const delayRef = useRef(null);
   const searching = useCallback(async () => {
     if (searchInput) {
@@ -41,16 +51,21 @@ export default function Layout({ children }) {
       const data = await response.json();
 
       setData(data);
-    } else {
-      setData(null);
+      setLoading(false);
     }
   }, [searchInput]);
 
   useEffect(() => {
     clearTimeout(delayRef.current);
     delayRef.current = setTimeout(searching, 300);
+
     return () => clearTimeout(delayRef.current);
   }, [searchInput, searching]);
+
+  function clearSearchInput() {
+    setSearchInput('');
+    inputSearchRef.current.focus();
+  }
 
   function hiddenSearch() {
     unableScroll();
@@ -89,7 +104,7 @@ export default function Layout({ children }) {
             {searchInput && (
               <button
                 type="button"
-                onClick={() => setSearchInput('')}
+                onClick={clearSearchInput}
                 className={styles.clearBtn}
               >
                 <Img src={'/icons/close.svg'} alt={'input clear icon'} />
@@ -99,38 +114,42 @@ export default function Layout({ children }) {
 
           <div className={styles.bottom}>
             <div className={styles.results}>
-              {data && data.status === true && (
-                <div className={styles.resultLists}>
-                  <ul>
-                    {data.articles.docs.map((article) => {
-                      return (
-                        <li key={article._id} onClick={hiddenSearch}>
+              {loading && <p className={styles.loading}>.....</p>}
+
+              {!loading && data && (
+                <>
+                  {data.status === true ? (
+                    <div className={styles.resultLists}>
+                      <ul>
+                        {data.articles.docs.map((article) => {
+                          return (
+                            <li key={article._id} onClick={hiddenSearch}>
+                              <Link
+                                href={`/article/${article.permalink}`}
+                                className={styles.articleLink}
+                              >
+                                {article.title}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+
+                      {data.articles.hasNextPage && (
+                        <p className={styles.moreLink}>
                           <Link
-                            href={`/article/${article.permalink}`}
-                            className={styles.articleLink}
+                            href={`/search/${searchInput}`}
+                            onClick={hiddenSearch}
                           >
-                            {article.title}
+                            Lihat selengkapnya...
                           </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-
-                  {data.articles.hasNextPage && (
-                    <p className={styles.moreLink}>
-                      <Link
-                        href={`/search/${searchInput}`}
-                        onClick={hiddenSearch}
-                      >
-                        Lihat selengkapnya...
-                      </Link>
-                    </p>
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    <p className={styles.noResults}>Tidak ada hasil</p>
                   )}
-                </div>
-              )}
-
-              {data && data.status === false && (
-                <p className={styles.noResults}>Tidak ada hasil</p>
+                </>
               )}
             </div>
 
