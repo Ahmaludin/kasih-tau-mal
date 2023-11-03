@@ -10,18 +10,7 @@ const montage = localFont({
   style: 'normal',
 });
 
-const categories = [
-  'gaming',
-  'sport',
-  'makanan',
-  'otomotif',
-  'entertainment',
-  'lifestyle',
-  'tech',
-  'tutorial',
-];
-
-export default function Footer() {
+export default function Footer({ categories }) {
   const footerRef = useRef(null);
 
   useEffect(() => {

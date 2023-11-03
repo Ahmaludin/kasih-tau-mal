@@ -45,7 +45,7 @@ export default function Layout({ children }) {
 
       {children}
 
-      <Footer />
+      <Footer categories={categories} />
     </main>
   );
 }
