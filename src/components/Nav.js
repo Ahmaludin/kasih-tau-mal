@@ -1,10 +1,11 @@
-import styles from '../styles/nav.module.scss';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import localFont from 'next/font/local';
+
 import Menus from './Menus';
-import { useEffect, useRef, useState } from 'react';
 import disableScroll from '@/utils/disableScroll';
+import styles from '../styles/nav.module.scss';
 
 const montage = localFont({
   src: '../../public/fonts/MontageSerifFont-Regular.otf',
@@ -16,30 +17,33 @@ export default function Nav(props) {
   const searchRef = props.searchRef;
   const mobileMenuRef = props.mobileMenuRef;
   const inputSearchRef = props.inputSearchRef;
+  const categories = props.categories;
 
   const [lastScroll, setLastScroll] = useState(0);
 
-  const navRef = useRef(null);
-
   useEffect(() => {
-    const onScroll = () => {
-      lastScroll < window.scrollY
-        ? navRef.current?.classList.add('navHidden')
-        : navRef.current?.classList.remove('navHidden');
-
-      setLastScroll(window.scrollY);
-    };
-
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   });
 
+  // scrolling function
+  const navRef = useRef(null);
+  function onScroll() {
+    lastScroll < window.scrollY
+      ? navRef.current?.classList.add('navHidden')
+      : navRef.current?.classList.remove('navHidden');
+
+    setLastScroll(window.scrollY);
+  }
+
+  // show search component function
   function showSearch() {
     disableScroll();
     searchRef.current?.classList.add('showSearch');
     inputSearchRef.current.focus();
   }
 
+  // show mobile menu component function
   function showMobileMenu() {
     document.body.style.overflowY = 'hidden';
     mobileMenuRef.current.style.display = 'inherit';
@@ -74,7 +78,7 @@ export default function Nav(props) {
           </div>
         </div>
 
-        <Menus />
+        <Menus categories={categories} />
       </div>
     </nav>
   );

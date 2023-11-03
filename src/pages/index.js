@@ -32,6 +32,7 @@ export async function getServerSideProps() {
   return { props: { data } };
 }
 
+// masalah image sizes
 // buat meta head
 // favicon dan judul tiap halaman
 
