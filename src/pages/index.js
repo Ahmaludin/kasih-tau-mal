@@ -23,14 +23,16 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const response = await fetch(`${process.env.API_HOST}articles-home?page=1`);
   const data = await response.json();
 
   return { props: { data } };
 }
 
-// masalah image sizes & seharusnya link image jangan pake link api
+// buat icon search di search comp
+// cek dan benerin search page
+// masalah image sizes
 
 // IDEA LISTS
 
