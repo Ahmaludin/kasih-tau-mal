@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import { Poppins } from 'next/font/google';
 
+import Search from './Search.js';
+import MobileMenu from './MobileMenu.js';
 import Nav from './Nav.js';
 import Footer from './Footer.js';
-import MobileMenu from './MobileMenu.js';
-import Search from './Search.js';
 
 const poppins = Poppins({
   weight: ['400', '600', '700', '800'],

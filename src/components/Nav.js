@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import localFont from 'next/font/local';
 
-import Menus from './Menus';
 import disableScroll from '@/utils/disableScroll';
 import styles from '../styles/nav.module.scss';
+import Menus from './Menus';
 
 const montage = localFont({
   src: '../../public/fonts/MontageSerifFont-Regular.otf',
