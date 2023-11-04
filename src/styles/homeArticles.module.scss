@@ -1,0 +1,13 @@
+@import './mixins';
+@import './colors.module.scss';
+
+.articles {
+  @include width;
+  @include desktop;
+  display: flex;
+  flex-direction: column;
+
+  .sectionTitle {
+    @include sectionTitle($textDark);
+  }
+}

@@ -1,0 +1,157 @@
+@import './mixins';
+@import './colors.module.scss';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  font-family: var(--font-proxima-nova);
+  color: $textDark;
+}
+
+*:focus {
+  outline: none;
+}
+
+html.noscroll {
+  position: fixed;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+body {
+  --nav-height: 120px;
+  --nav-height-mobile: 40px;
+
+  background-color: $lightColor;
+  padding-top: var(--nav-height);
+
+  @include mobileLandscape {
+    padding-top: var(--nav-height-mobile);
+  }
+}
+
+body::-webkit-scrollbar {
+  width: 13px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #ededed;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+input {
+  background-color: transparent;
+  font-size: 1rem;
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+input::placeholder {
+  color: #fff;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+// nav global style
+.navHidden {
+  transform: translateY(calc(-1 * var(--nav-height)));
+  -webkit-transform: translateY(calc(-1 * var(--nav-height)));
+  -moz-transform: translateY(calc(-1 * var(--nav-height)));
+  -ms-transform: translateY(calc(-1 * var(--nav-height)));
+  -o-transform: translateY(calc(-1 * var(--nav-height)));
+}
+//
+
+// search global style
+.showSearch {
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+}
+//
+
+// subscribe button global style
+.buttonDance {
+  animation: buttonDance 300ms linear;
+  -webkit-animation: buttonDance 300ms linear;
+}
+
+@keyframes buttonDance {
+  0% {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+  20% {
+    transform: translateX(5px);
+    -webkit-transform: translateX(5px);
+    -moz-transform: translateX(5px);
+    -ms-transform: translateX(5px);
+    -o-transform: translateX(5px);
+  }
+  40% {
+    transform: translateX(-5px);
+    -webkit-transform: translateX(-5px);
+    -moz-transform: translateX(-5px);
+    -ms-transform: translateX(-5px);
+    -o-transform: translateX(-5px);
+  }
+  60% {
+    transform: translateX(5px);
+    -webkit-transform: translateX(5px);
+    -moz-transform: translateX(5px);
+    -ms-transform: translateX(5px);
+    -o-transform: translateX(5px);
+  }
+  80% {
+    transform: translateX(-5px);
+    -webkit-transform: translateX(-5px);
+    -moz-transform: translateX(-5px);
+    -ms-transform: translateX(-5px);
+    -o-transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+}
+//

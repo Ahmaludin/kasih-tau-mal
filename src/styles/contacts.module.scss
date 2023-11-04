@@ -1,0 +1,71 @@
+@import './mixins';
+@import './colors.module.scss';
+
+.container {
+  @include width;
+  height: calc(100vh - var(--nav-height) - var(--footer-height));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include mobileLandscape {
+    height: 500px;
+  }
+
+  .wrap {
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .content {
+      background-color: rgba($color: $textDark, $alpha: 0.75);
+      padding: 50px;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      @include mobileLandscape {
+        padding: 20px;
+      }
+
+      a {
+        background-color: $lightColor;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+
+        @include mobileLandscape {
+          padding: 5px 10px;
+        }
+
+        p {
+          font-size: 22px;
+
+          @include mobileLandscape {
+            font-size: 1rem;
+          }
+        }
+
+        img {
+          @include mobileLandscape {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+  }
+}

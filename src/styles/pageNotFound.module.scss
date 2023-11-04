@@ -1,0 +1,85 @@
+@import './mixins';
+@import './colors.module.scss';
+
+.page404 {
+  @include width;
+  height: calc(100vh - var(--nav-height) - var(--footer-height));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include mobileLandscape {
+    height: max-content;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    @include mobileLandscape {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .imgContainer {
+      position: relative;
+      aspect-ratio: 3/4;
+      width: 360px;
+
+      @include tablet {
+        width: 240px;
+      }
+
+      .img {
+        object-fit: cover;
+        filter: drop-shadow(-10px 15px 10px rgba($textDark, 0.3));
+        -webkit-filter: drop-shadow(-10px 15px 10px rgba($textDark, 0.3));
+      }
+
+      .img:hover {
+        object-fit: cover;
+        filter: drop-shadow(-13px 18px 10px rgba($textDark, 0.3));
+        -webkit-filter: drop-shadow(-13px 18px 10px rgba($textDark, 0.3));
+      }
+    }
+
+    .texts {
+      .title {
+        font-size: 3rem;
+        font-weight: bold;
+
+        @include tablet {
+          font-size: 2.5rem;
+        }
+
+        @include mobile {
+          font-size: 2rem;
+        }
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 20px;
+        background-color: tomato;
+        color: $lightColor;
+        padding: 10px 20px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        box-shadow: 0 10px 25px rgba($color: $textDark, $alpha: 0.2);
+      }
+
+      .btn:hover {
+        box-shadow: 0 10px 25px rgba($color: $textDark, $alpha: 0.25);
+      }
+
+      @include mobileLandscape {
+        margin-bottom: 50px;
+      }
+    }
+  }
+}
