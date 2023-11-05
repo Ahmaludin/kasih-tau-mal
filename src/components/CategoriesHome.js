@@ -32,22 +32,22 @@ const CategoriesHome = () => {
 
         <div className={`${styles.category} ${styles.category2}`}>
           <div>
-            <Link href={`/category/entertainment`}>
+            <Link href={`/category/anime`}>
               <Image
                 width={400}
                 height={400}
-                src="/images/category-entertainment.jpg"
+                src="/images/category-anime.jpg"
                 alt="category image"
                 className={styles.image}
               />
             </Link>
           </div>
 
-          <Link href={`/category/entertainment`} className={styles.title}>
-            ENTERTAINMENT
+          <Link href={`/category/anime`} className={styles.title}>
+            ANIME
           </Link>
           <p className={styles.info}>
-            Hiburan dari seluruh dunia melupakan badmood mu.
+            Apakah dirimu itu seorang wibu? Cocok banget nih.
           </p>
         </div>
 

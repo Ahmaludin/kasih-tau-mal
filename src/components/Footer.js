@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import localFont from 'next/font/local';
 
@@ -11,19 +10,8 @@ const montage = localFont({
 });
 
 export default function Footer({ categories }) {
-  const footerRef = useRef(null);
-
-  useEffect(() => {
-    if (footerRef.current) {
-      const height = getComputedStyle(footerRef.current).getPropertyValue(
-        'height'
-      );
-      document.body.style.setProperty('--footer-height', height);
-    }
-  }, [footerRef]);
-
   return (
-    <footer className={styles.footer} ref={footerRef}>
+    <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.main}>

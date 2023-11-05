@@ -4,7 +4,7 @@ import Subscribe from '@/components/Subscribe';
 import CategoriesHome from '@/components/CategoriesHome';
 import MetaHead from '@/components/MetaHead';
 
-export default function Home(props) {
+export default function Home() {
   return (
     <>
       <MetaHead
@@ -17,17 +17,10 @@ export default function Home(props) {
         <Header />
         <CategoriesHome />
         <Subscribe />
-        <HomeArticles data={props.data} />
+        <HomeArticles />
       </main>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const response = await fetch(`${process.env.API_HOST}articles-home?page=1`);
-  const data = await response.json();
-
-  return { props: { data } };
 }
 
 // IDEA LISTS

@@ -1,29 +1,61 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../../styles/category.module.scss';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
+import MetaHead from '@/components/MetaHead';
 import ArticleLists from '@/components/ArticleLists';
 import LoadMoreBtn from '@/components/LoadMoreBtn';
-import MetaHead from '@/components/MetaHead';
+import styles from '../../styles/category.module.scss';
+import { ScaleLoader } from 'react-spinners';
 
-const Category = props => {
-  const [label, setLabel] = useState(props.label);
-  const [articles, setArticles] = useState(props.data.articles.docs);
-  const [articlesData, setArticlesData] = useState(props.data.articles);
+const Category = () => {
+  const router = useRouter();
+
+  const [loading, setLoading] = useState(true);
+
+  const [label, setLabel] = useState(router.query.category);
+  const [articles, setArticles] = useState([]);
+  const [articlesData, setArticlesData] = useState({});
 
   const [nextLoading, setNextLoading] = useState(false);
 
   useEffect(() => {
-    setLabel(props.label);
-    setArticles(props.data.articles.docs);
-    setArticlesData(props.data.articles);
-  }, [props]);
+    const label = router.query.category;
+    setLabel(label);
+
+    async function getArticles() {
+      setLoading(true);
+
+      const response = await fetch(
+        `${process.env.API_HOST}articles-label/${label}?page=1`
+      );
+      const data = await response.json();
+
+      console.log('jalan');
+
+      if (data.status === false && data.message === 'ARTICLES_NOT_FOUND') {
+        router.push('/404');
+        setLoading(false);
+        return;
+      }
+
+      if (data.status === true && data.message === 'ARTICLES_FOUND') {
+        setArticles(data.articles.docs);
+        setArticlesData(data.articles);
+        setLoading(false);
+      }
+    }
+
+    getArticles();
+  }, [router]);
 
   async function getNextArticles() {
     setNextLoading(true);
 
     const response = await fetch(
-      `${process.env.API_HOST}articles-label/${label}?page=${articlesData.page + 1}`
+      `${process.env.API_HOST}articles-label/${label}?page=${
+        articlesData.page + 1
+      }`
     );
 
     const data = await response.json();
@@ -39,6 +71,14 @@ const Category = props => {
     }
   }
 
+  if (loading) {
+    return (
+      <div className="categoryAndSearchPageLoading">
+        <ScaleLoader color={'#252525'} loading={true} width={4} height={10} />
+      </div>
+    );
+  }
+
   return (
     <>
       <MetaHead
@@ -48,7 +88,9 @@ const Category = props => {
       />
 
       <section className={styles.articles}>
-        <h3 className={styles.labelArea}>&quot;{label.replace('-', ' ')}&quot; area</h3>
+        <h3 className={styles.labelArea}>
+          area &quot;{label.replace('-', ' ')}&quot;
+        </h3>
 
         {articles.length > 1 && (
           <Link href={`/article/${articles[0].permalink}`}>
@@ -87,16 +129,3 @@ const Category = props => {
 };
 
 export default Category;
-
-export async function getServerSideProps(context) {
-  const label = context.query.category;
-
-  const response = await fetch(`${process.env.API_HOST}articles-label/${label}?page=1`);
-  const data = await response.json();
-
-  if (data.status === true && data.message === 'ARTICLES_FOUND') {
-    return { props: { data, label } }; // render this page
-  } else if (data.status === false && data.message === 'ARTICLES_NOT_FOUND') {
-    return { notFound: true }; // go to 404 page
-  }
-}

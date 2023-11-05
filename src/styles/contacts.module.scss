@@ -3,15 +3,10 @@
 
 .container {
   @include width;
-  height: calc(100vh - var(--nav-height) - var(--footer-height));
-
+  height: 548px;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @include mobileLandscape {
-    height: 500px;
-  }
 
   .wrap {
     h2 {

@@ -1,14 +1,29 @@
-import { useState } from 'react';
-
-import LoadMoreBtn from './LoadMoreBtn';
-
-import styles from '../styles/homeArticles.module.scss';
+import { useEffect, useState } from 'react';
 import ArticleLists from './ArticleLists';
+import LoadMoreBtn from './LoadMoreBtn';
+import styles from '../styles/homeArticles.module.scss';
 
-export default function HomeArticles(props) {
-  const [articles, setArticles] = useState(props.data.articles.docs);
-  const [articlesData, setArticlesData] = useState(props.data.articles);
+export default function HomeArticles() {
+  const [loading, setLoading] = useState(true);
+
+  const [articles, setArticles] = useState([]);
+  const [articlesData, setArticlesData] = useState({});
   const [nextLoading, setNextLoading] = useState(false);
+
+  useEffect(() => {
+    getArticles();
+  }, []);
+
+  async function getArticles() {
+    const response = await fetch(`${process.env.API_HOST}articles-home?page=1`);
+    const data = await response.json();
+
+    if (data.status === true) {
+      setArticles(data.articles.docs);
+      setArticlesData(data.articles);
+      setLoading(false);
+    }
+  }
 
   async function getNextArticles() {
     setNextLoading(true);
@@ -30,16 +45,39 @@ export default function HomeArticles(props) {
     setNextLoading(false);
   }
 
+  const SkeletonLoad = () => {
+    return (
+      <div className={styles.box}>
+        <div className={styles.imgBox} />
+        <div className={styles.text} />
+        <div className={styles.text} />
+        <div className={styles.text} />
+        <div className={styles.text} />
+        <div className={styles.text} />
+      </div>
+    );
+  };
+
   return (
     <section className={styles.articles}>
       <h3 className={styles.sectionTitle}>ARTICLES</h3>
 
-      <ArticleLists articles={articles} />
+      {loading ? (
+        <div className={styles.loadingContainer}>
+          <SkeletonLoad />
+          <SkeletonLoad />
+          <SkeletonLoad />
+        </div>
+      ) : (
+        <>
+          <ArticleLists articles={articles} />
 
-      {articlesData.hasNextPage && (
-        <button type="button" onClick={getNextArticles}>
-          <LoadMoreBtn nextLoading={nextLoading} />
-        </button>
+          {articlesData.hasNextPage && (
+            <button type="button" onClick={getNextArticles}>
+              <LoadMoreBtn nextLoading={nextLoading} />
+            </button>
+          )}
+        </>
       )}
     </section>
   );

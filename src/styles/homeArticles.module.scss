@@ -10,4 +10,55 @@
   .sectionTitle {
     @include sectionTitle($textDark);
   }
+
+  .loadingContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 40px;
+    row-gap: 80px;
+    margin-bottom: 50px;
+
+    @include desktop2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include tablet {
+      gap: 20px;
+    }
+
+    @include mobileLandscape {
+      grid-template-columns: 1fr;
+    }
+
+    .box {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 10px 15px rgba($color: $textDark, $alpha: 0.1);
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+
+      .imgBox {
+        position: relative;
+        aspect-ratio: 3/2;
+        background-color: #f6f7fb;
+        margin-bottom: 20px;
+      }
+
+      .text {
+        height: 20px;
+        background-color: #f6f7fb;
+        margin-bottom: 10px;
+      }
+
+      .text:nth-child(3) {
+        width: 70%;
+      }
+      .text:nth-child(6) {
+        width: 30%;
+      }
+    }
+  }
 }

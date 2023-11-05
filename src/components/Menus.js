@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from '../styles/menus.module.scss';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -67,7 +68,13 @@ export default function Menus(props) {
         onMouseLeave={() => dropdownNonActive('categories')}
       >
         <p className={styles.title}>Categories</p>
-        <span className={styles.dropdownSymbol}>&#9207;</span>
+        <Image
+          src={'/icons/dropdown.svg'}
+          width={26}
+          height={26}
+          alt="dropdown icon"
+          className={styles.dropdownIcon}
+        />
 
         {categoriesDropdownActive && (
           <ul
@@ -91,7 +98,13 @@ export default function Menus(props) {
         onMouseLeave={() => dropdownNonActive('gaming')}
       >
         <p className={styles.title}>Gaming</p>
-        <span className={styles.dropdownSymbol}>&#9207;</span>
+        <Image
+          src={'/icons/dropdown.svg'}
+          width={26}
+          height={26}
+          alt="dropdown icon"
+          className={styles.dropdownIcon}
+        />
 
         {gamingDropdownActive && (
           <ul className={`${styles.dropdownContent} ${styles.dropdownGaming}`}>
@@ -113,7 +126,13 @@ export default function Menus(props) {
         onMouseLeave={() => dropdownNonActive('sport')}
       >
         <p className={styles.title}>Sport</p>
-        <span className={styles.dropdownSymbol}>&#9207;</span>
+        <Image
+          src={'/icons/dropdown.svg'}
+          width={26}
+          height={26}
+          alt="dropdown icon"
+          className={styles.dropdownIcon}
+        />
 
         {sportDropdownActive && (
           <ul className={`${styles.dropdownContent} ${styles.dropdownSport}`}>
