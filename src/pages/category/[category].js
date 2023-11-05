@@ -2,27 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ScaleLoader } from 'react-spinners';
 import MetaHead from '@/components/MetaHead';
 import ArticleLists from '@/components/ArticleLists';
 import LoadMoreBtn from '@/components/LoadMoreBtn';
 import styles from '../../styles/category.module.scss';
-import { ScaleLoader } from 'react-spinners';
 
 const Category = () => {
   const router = useRouter();
+  const { category: label } = router.query;
 
   const [loading, setLoading] = useState(true);
 
-  const [label, setLabel] = useState(router.query.category);
   const [articles, setArticles] = useState([]);
   const [articlesData, setArticlesData] = useState({});
 
   const [nextLoading, setNextLoading] = useState(false);
 
   useEffect(() => {
-    const label = router.query.category;
-    setLabel(label);
-
     async function getArticles() {
       setLoading(true);
 
@@ -31,10 +28,9 @@ const Category = () => {
       );
       const data = await response.json();
 
-      console.log('jalan');
-
       if (data.status === false && data.message === 'ARTICLES_NOT_FOUND') {
-        router.push('/404');
+        setArticles([]);
+        setArticlesData({});
         setLoading(false);
         return;
       }
@@ -46,8 +42,8 @@ const Category = () => {
       }
     }
 
-    getArticles();
-  }, [router]);
+    label && getArticles();
+  }, [label]);
 
   async function getNextArticles() {
     setNextLoading(true);
@@ -75,6 +71,14 @@ const Category = () => {
     return (
       <div className="categoryAndSearchPageLoading">
         <ScaleLoader color={'#252525'} loading={true} width={4} height={10} />
+      </div>
+    );
+  }
+
+  if (articles.length === 0) {
+    return (
+      <div className="categoryAndSearchPageLoading">
+        <p>Opps...! Tidak ada label {label}</p>
       </div>
     );
   }

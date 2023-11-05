@@ -111,6 +111,7 @@ export default function Search(props) {
           alt="close button"
           width={42}
           height={42}
+          className={styles.closeIcon}
         />
       </button>
 

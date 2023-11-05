@@ -7,16 +7,19 @@ import { ScaleLoader } from 'react-spinners';
 
 export default function Search() {
   const router = useRouter();
-  const { input } = router.query;
 
   const [loading, setLoading] = useState(true);
 
+  const [input, setInput] = useState('');
   const [articles, setArticles] = useState([]);
   const [articlesData, setArticlesData] = useState({});
 
   const [nextLoading, setNextLoading] = useState(false);
 
   useEffect(() => {
+    const { input } = router.query;
+    setInput(input);
+
     async function getArticles() {
       setLoading(true);
 
@@ -25,6 +28,12 @@ export default function Search() {
       );
       const data = await response.json();
 
+      if (data.status === false && data.message === 'ARTICLES_NOT_FOUND') {
+        router.push('/404');
+        setLoading(false);
+        return;
+      }
+
       if (data.status === true && data.message === 'ARTICLES_FOUND') {
         setArticles(data.articles.docs);
         setArticlesData(data.articles);
@@ -32,8 +41,8 @@ export default function Search() {
       }
     }
 
-    getArticles();
-  }, [input]);
+    input && getArticles();
+  }, [router]);
 
   async function getNextArticles() {
     setNextLoading(true);

@@ -15,9 +15,11 @@ export default function Footer({ categories }) {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.main}>
-            <Link href={`/`} className={styles.logo}>
-              <h1 style={montage.style}>KASIHTAUMAL</h1>
-            </Link>
+            <h1 className={styles.logo}>
+              <Link href={'/'} style={montage.style}>
+                KASIHTAUMAL
+              </Link>
+            </h1>
 
             <ul>
               <li>

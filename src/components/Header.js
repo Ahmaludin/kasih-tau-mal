@@ -17,6 +17,7 @@ const Header = () => {
           alt="sampul image"
           fill
           className={styles.image}
+          priority
         />
 
         <div className={styles.text}>

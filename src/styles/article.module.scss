@@ -150,3 +150,14 @@
     }
   }
 }
+
+.loading {
+  height: calc(100vh - var(--nav-height));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include mobileLandscape {
+    height: calc(100vh - var(--nav-height-mobile));
+  }
+}

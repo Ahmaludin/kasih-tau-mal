@@ -174,8 +174,6 @@
     bottom: 50px;
     left: 50px;
     box-shadow: 5px 5px #777;
-    animation: showNotif 1000ms;
-    -webkit-animation: showNotif 1000ms;
 
     @include mobile {
       padding: 10px 0;
@@ -189,6 +187,9 @@
       -o-transform: translateX(-50%);
     }
 
+    animation: showNotif 500ms;
+    -webkit-animation: showNotif 500ms;
+
     p {
       text-align: center;
       color: #fff;
@@ -197,19 +198,9 @@
     @keyframes showNotif {
       from {
         opacity: 0;
-        transform: translateY(20px);
-        -webkit-transform: translateY(20px);
-        -moz-transform: translateY(20px);
-        -ms-transform: translateY(20px);
-        -o-transform: translateY(20px);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
       }
     }
   }
