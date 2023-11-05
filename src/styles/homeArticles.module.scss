@@ -60,5 +60,16 @@
         width: 30%;
       }
     }
+
+    @include desktop2 {
+      .box:nth-child(3) {
+        display: none;
+      }
+    }
+    @include mobileLandscape {
+      .box:nth-child(2) {
+        display: none;
+      }
+    }
   }
 }
